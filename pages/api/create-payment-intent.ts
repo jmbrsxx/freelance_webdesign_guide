@@ -50,7 +50,7 @@ export default async function handler(
       receipt_email: email,
     });
 
-    res.status(200).json({ clientSecret: paymentIntent.client_secret });
+    res.status(200).json({ clientSecret: paymentIntent.client_secret ?? undefined });
   } catch (error) {
     // Don't expose internal error details to client
     if (process.env.NODE_ENV === 'development') {
