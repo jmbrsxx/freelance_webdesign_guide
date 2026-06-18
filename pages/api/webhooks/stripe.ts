@@ -48,14 +48,16 @@ export default async function handler(
 
         // Extract email and courseTitle from metadata
         const email = paymentIntent.metadata?.email;
-        const courseTitle = paymentIntent.metadata?.courseTitle || 'Course';
+        const courseTitle = paymentIntent.metadata?.courseTitle || 'Freelance Web Design & Development Course';
+        const downloadUrl = paymentIntent.metadata?.downloadUrl || `${process.env.NEXT_PUBLIC_BASE_URL || 'https://yourdomain.com'}/api/download-course?id=${paymentIntent.id}`;
 
         if (email) {
           // Send confirmation email
           const emailResult = await sendCourseConfirmationEmail(
             email,
             courseTitle,
-            paymentIntent.id
+            paymentIntent.id,
+            downloadUrl
           );
 
           if (!emailResult.success) {

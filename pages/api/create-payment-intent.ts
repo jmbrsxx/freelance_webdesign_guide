@@ -45,7 +45,8 @@ export default async function handler(
       payment_method_types: ['card'],
       metadata: {
         email,
-        courseTitle: courseTitle || 'Complete Web Design Course',
+        courseTitle: courseTitle || 'Freelance Web Design & Development Course',
+        downloadUrl: `${process.env.NEXT_PUBLIC_BASE_URL || process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000'}/api/download-course`,
       },
       receipt_email: email,
     });

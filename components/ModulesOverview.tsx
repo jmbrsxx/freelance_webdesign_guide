@@ -1,11 +1,16 @@
 import React from 'react'
 
+const MaterialIcon = ({ name }: { name: string }) => (
+  <span className="material-icons align-middle">{name}</span>
+)
+
 export default function ModulesOverview() {
   const modules = [
     {
       number: 1,
       title: 'Mindset & Market Reality',
       description: 'Why freelancers struggle, choosing your technical stack, niche selection, and building your first 90-day plan.',
+      icon: 'psychology',
       lessons: [
         'Why Freelancing Works — and Why Most Fail',
         'Choosing Your Stack & Specialization',
@@ -17,6 +22,7 @@ export default function ModulesOverview() {
       number: 2,
       title: 'Skills, Tools & Tech Stack',
       description: 'The minimal viable tech stack (zero-cost startup), design fundamentals, workflow, using AI tools effectively, and building your first demo site.',
+      icon: 'build',
       lessons: [
         'The Minimal Viable Tech Stack',
         'Design Fundamentals for Non-Designers',
@@ -29,6 +35,7 @@ export default function ModulesOverview() {
       number: 3,
       title: 'Portfolio That Converts',
       description: 'Portfolio strategy, how to create portfolio work without real clients, writing case studies, building your portfolio site, and a review checklist.',
+      icon: 'target',
       lessons: [
         'Portfolio Strategy — Most Freelancers Get This Wrong',
         'Creating Portfolio Work Without Real Clients',
@@ -41,6 +48,7 @@ export default function ModulesOverview() {
       number: 4,
       title: 'Pricing: What to Charge & How to Say It',
       description: 'Three pricing models, calculating your minimum rate, packaging services into tiers, handling pricing conversations, and raising rates over time.',
+      icon: 'attach_money',
       lessons: [
         'The 3 Pricing Models and When to Use Each',
         'How to Set Your Rates — The Real Formula',
@@ -53,6 +61,7 @@ export default function ModulesOverview() {
       number: 5,
       title: 'Finding Clients — The Full System',
       description: 'Client acquisition channels, warm outreach, cold email, freelance platforms, content marketing, and partnerships.',
+      icon: 'people',
       lessons: [
         'The Client Acquisition Matrix',
         'Warm Outreach & Network Activation',
@@ -66,6 +75,7 @@ export default function ModulesOverview() {
       number: 6,
       title: 'Sales: From Lead to Signed Contract',
       description: 'Discovery calls, writing proposals, objection handling, contract essentials, and getting paid on time.',
+      icon: 'description',
       lessons: [
         'The Discovery Call Framework',
         'Writing Proposals That Win',
@@ -78,6 +88,7 @@ export default function ModulesOverview() {
       number: 7,
       title: 'Client Management & Project Delivery',
       description: 'Client onboarding, communication protocols, managing revisions, pre-launch checklist, and retaining clients with ongoing work.',
+      icon: 'assignment',
       lessons: [
         'The Client Onboarding System',
         'Communication Protocols That Prevent 95% of Problems',
@@ -90,6 +101,7 @@ export default function ModulesOverview() {
       number: 8,
       title: 'Scaling: From Freelancer to Business',
       description: 'Business structure options, documentation and systems, personal branding, outsourcing and delegation, and building multiple income streams.',
+      icon: 'trending_up',
       lessons: [
         'Business Foundations & Legal Setup',
         'Building Systems That Scale',
@@ -111,8 +123,8 @@ export default function ModulesOverview() {
             <div key={module.number} className="border border-slate-200 rounded-lg p-6 hover:shadow-lg transition-shadow">
               <div className="flex items-start gap-4">
                 <div className="flex-shrink-0">
-                  <div className="flex items-center justify-center h-12 w-12 rounded-full bg-blue-500 text-white font-bold text-lg">
-                    {module.number}
+                  <div className="p-2 bg-blue-50 rounded">
+                    <MaterialIcon name={module.icon} />
                   </div>
                 </div>
                 <div className="flex-1">

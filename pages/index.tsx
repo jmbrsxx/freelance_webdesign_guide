@@ -1,129 +1,230 @@
 import React from 'react'
 import Link from 'next/link'
 
+const MaterialIcon = ({ name }: { name: string }) => (
+  <span className="material-icons text-2xl align-middle">{name}</span>
+)
+
 export default function Home() {
   return (
-    <div className="min-h-screen bg-white">
-      {/* Main Content */}
-      <div className="max-w-3xl mx-auto px-6 py-16">
-        {/* Header */}
-        <div className="mb-12">
-          <h1 className="text-4xl md:text-5xl font-bold mb-6 leading-tight">
-            💼 The Complete Freelance Web Design & Development Course
-          </h1>
-          <p className="text-xl md:text-2xl text-gray-700 font-semibold mb-6">
-            96-Page System for Going from Zero Clients to a Working Freelance Business
-          </p>
-        </div>
-
-        {/* Opening Statement */}
-        <div className="mb-8 space-y-6">
-          <p className="text-lg text-gray-800">Stop posting on Instagram hoping for clients. <strong>This is the actual system.</strong></p>
-          <p className="text-gray-700 leading-relaxed">
-            A complete guide covering everything you need to know about the business side of freelance web design — from picking a niche to pricing your work, finding clients, closing deals, delivering projects, and scaling to recurring revenue.
-          </p>
-        </div>
-
-        {/* What's Inside */}
-        <div className="mb-12">
-          <h2 className="text-2xl font-bold mb-6 flex items-center gap-2">
-            🧠 What's Inside:
-          </h2>
-          
-          <div className="space-y-8">
-            {/* 8 Modules */}
-            <div>
-              <h3 className="text-lg font-semibold mb-4 flex items-center gap-2">
-                ✅ 8 Modules, 47 Lessons, 96 Pages:
-              </h3>
-              <ul className="space-y-2 ml-6 text-gray-700">
-                <li>• Module 1: Mindset & Niche Selection</li>
-                <li>• Module 2: Tech Stack & Building Your First Portfolio</li>
-                <li>• Module 3: Portfolio Strategy & Case Studies</li>
-                <li>• Module 4: Pricing Models & Rate Calculation</li>
-                <li>• Module 5: Client Acquisition (5 Different Channels)</li>
-                <li>• Module 6: Sales, Proposals & Contracts</li>
-                <li>• Module 7: Client Management & Project Delivery</li>
-                <li>• Module 8: Scaling, Systems & Recurring Revenue</li>
-              </ul>
-            </div>
-
-            {/* Practical Frameworks */}
-            <div>
-              <h3 className="text-lg font-semibold mb-4 flex items-center gap-2">
-                ✅ Practical frameworks you'll actually use:
-              </h3>
-              <ul className="space-y-2 ml-6 text-gray-700">
-                <li>• Rate calculator (work backward from income goal)</li>
-                <li>• Pricing decision tree (hourly vs. project vs. retainer)</li>
-                <li>• Cold email template + follow-up sequence</li>
-                <li>• Discovery call framework (10 key questions)</li>
-                <li>• Proposal structure (what wins deals)</li>
-                <li>• 8 essential contract clauses</li>
-                <li>• Pre-launch checklist (25 points)</li>
-              </ul>
-            </div>
-
-            {/* No Theory */}
-            <div>
-              <h3 className="text-lg font-semibold mb-2 flex items-center gap-2">
-                ✅ Templates, scripts, checklists — not theory. No filler.
-              </h3>
-            </div>
-          </div>
-        </div>
-
-        {/* Why It Works */}
-        <div className="mb-12 bg-gray-50 p-8 rounded-lg">
-          <h2 className="text-2xl font-bold mb-4 flex items-center gap-2">
-            🔍 Why It Works:
-          </h2>
-          <p className="text-gray-700 leading-relaxed">
-            Most freelancers fail from lack of systems, not lack of skill. This guide organizes everything in one place: how to position yourself, price confidently, find clients through multiple channels, close deals, protect yourself with contracts, deliver successfully, and build recurring revenue. Each module builds on the last.
-          </p>
-        </div>
-
-        {/* Perfect For */}
-        <div className="mb-12">
-          <h2 className="text-2xl font-bold mb-6 flex items-center gap-2">
-            📦 Perfect for:
-          </h2>
-          <ul className="space-y-3 ml-6 text-gray-700">
-            <li>• Freelancers learning the business side (0-2 years in)</li>
-            <li>• Designers/developers tired of undercharging</li>
-            <li>• Anyone struggling to find consistent clients</li>
-            <li>• People who want frameworks they can reference repeatedly</li>
-            <li>• Creators wanting to understand systems before scaling</li>
-          </ul>
-        </div>
-
-        {/* Details */}
-        <div className="mb-12 bg-blue-50 p-8 rounded-lg border-2 border-blue-200">
-          <h2 className="text-2xl font-bold mb-4 flex items-center gap-2">
-            🛠️ Details:
-          </h2>
-          <p className="text-lg text-gray-800 font-semibold">
-            One-time payment ($27). Lifetime access. PDF + online reading. Updates included.
-          </p>
-        </div>
-
-        {/* CTA */}
-        <div className="mb-12">
-          <p className="text-lg text-gray-700 mb-6 flex items-center gap-2">
-            👉 Get the guide. Reference it for years. Build a real business.
-          </p>
-          <Link href="/free-course">
-            <button className="w-full md:w-auto bg-blue-600 hover:bg-blue-700 text-white font-bold py-4 px-8 rounded-lg text-lg transition">
-              Get the Guide
-            </button>
+    <div className="min-h-screen bg-gradient-to-b from-slate-50 to-white">
+      {/* Navigation */}
+      <nav className="border-b border-slate-200 bg-white sticky top-0 z-50">
+        <div className="max-w-4xl mx-auto px-6 py-4 flex justify-between items-center">
+          <h1 className="text-xl font-bold text-slate-900">Freelance Business Course</h1>
+          <Link href="/free-course" className="text-blue-600 hover:text-blue-700 font-medium">
+            Start Learning
           </Link>
         </div>
+      </nav>
+
+      {/* Main Content */}
+      <div className="max-w-4xl mx-auto px-6 py-20">
+        
+        {/* Hero Section */}
+        <section className="mb-20">
+          <div className="text-center mb-16">
+            <div className="flex justify-center mb-6">
+              <div className="p-3 bg-blue-100 rounded-full">
+                <MaterialIcon name="school" />
+              </div>
+            </div>
+            <h1 className="text-5xl md:text-6xl font-bold text-slate-900 mb-6 leading-tight">
+              Build a Profitable Freelance Business
+            </h1>
+            <p className="text-xl text-slate-600 max-w-2xl mx-auto leading-relaxed">
+              A complete, actionable system for going from zero clients to a six-figure freelance business. 96 pages, 47 lessons, proven frameworks.
+            </p>
+          </div>
+
+          {/* Quick Stats */}
+          <div className="grid grid-cols-3 gap-4 md:gap-6 mb-12">
+            <div className="bg-white border border-slate-200 rounded-lg p-6 text-center">
+              <div className="text-3xl font-bold text-blue-600 mb-2">8</div>
+              <div className="text-sm text-slate-600">Complete Modules</div>
+            </div>
+            <div className="bg-white border border-slate-200 rounded-lg p-6 text-center">
+              <div className="text-3xl font-bold text-blue-600 mb-2">96</div>
+              <div className="text-sm text-slate-600">Pages of Content</div>
+            </div>
+            <div className="bg-white border border-slate-200 rounded-lg p-6 text-center">
+              <div className="text-3xl font-bold text-blue-600 mb-2">47</div>
+              <div className="text-sm text-slate-600">Practical Lessons</div>
+            </div>
+          </div>
+
+          {/* CTA Button */}
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <Link href="/paid-course">
+              <button className="px-8 py-4 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-lg transition shadow-lg hover:shadow-xl">
+                View Full Course ($27)
+              </button>
+            </Link>
+            <Link href="/free-course">
+              <button className="px-8 py-4 bg-white border border-slate-300 hover:border-slate-400 text-slate-900 font-semibold rounded-lg transition">
+                Free Preview (Modules 1-3)
+              </button>
+            </Link>
+          </div>
+        </section>
+
+        {/* What You'll Learn */}
+        <section className="mb-20">
+          <h2 className="text-3xl font-bold text-slate-900 mb-12 text-center">What You'll Learn</h2>
+          
+          <div className="grid md:grid-cols-2 gap-8">
+            {[
+              { icon: "lightbulb", title: "Mindset & Market Reality", desc: "Understand the real landscape and why most freelancers fail" },
+              { icon: "settings", title: "Tech Stack & Portfolio", desc: "Build your foundation and create work that attracts clients" },
+              { icon: "trending_up", title: "Pricing Strategy", desc: "Calculate rates confidently and eliminate underpricing" },
+              { icon: "person_add", title: "Client Acquisition", desc: "Master 5 proven channels to find consistent, high-paying clients" },
+              { icon: "handshake", title: "Sales & Contracts", desc: "Close deals with confidence and protect yourself legally" },
+              { icon: "assessment", title: "Scaling & Systems", desc: "Build recurring revenue and grow beyond hourly work" },
+            ].map((item, idx) => (
+              <div key={idx} className="bg-white border border-slate-200 rounded-lg p-8 hover:border-blue-300 hover:shadow-md transition">
+                <div className="flex items-start gap-4">
+                  <div className="p-3 bg-blue-50 rounded-lg flex-shrink-0">
+                    <span className="material-icons text-blue-600">{item.icon}</span>
+                  </div>
+                  <div>
+                    <h3 className="text-lg font-semibold text-slate-900 mb-2">{item.title}</h3>
+                    <p className="text-slate-600">{item.desc}</p>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        {/* Inside the Course */}
+        <section className="mb-20">
+          <h2 className="text-3xl font-bold text-slate-900 mb-12 text-center">Inside the Course</h2>
+          
+          <div className="space-y-4">
+            {[
+              "Practical rate calculator to work backward from income goals",
+              "Cold email templates with follow-up sequences",
+              "Discovery call framework with 10 key questions",
+              "Winning proposal structure and templates",
+              "8 essential contract clauses to protect yourself",
+              "Project delivery checklist (25 critical points)",
+              "Client management systems and templates",
+              "Recurring revenue frameworks and examples",
+            ].map((item, idx) => (
+              <div key={idx} className="flex items-center gap-4 bg-white border border-slate-200 rounded-lg p-4 hover:border-green-300 transition">
+                <div className="text-green-600 flex-shrink-0">
+                  <span className="material-icons">check_circle</span>
+                </div>
+                <span className="text-slate-700">{item}</span>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        {/* Who This Is For */}
+        <section className="mb-20 bg-slate-100 rounded-lg p-12">
+          <h2 className="text-3xl font-bold text-slate-900 mb-8 text-center">Who This Is For</h2>
+          
+          <div className="grid md:grid-cols-2 gap-6">
+            {[
+              "Freelancers ready to systematize their business",
+              "Designers and developers tired of undercharging",
+              "Anyone struggling with inconsistent client flow",
+              "People who want repeatable, proven frameworks",
+              "Freelancers wanting to scale beyond hourly rates",
+              "Those seeking to build systems that work without them",
+            ].map((item, idx) => (
+              <div key={idx} className="flex items-start gap-3">
+                <span className="material-icons-outlined text-blue-600 flex-shrink-0 mt-1">circle</span>
+                <span className="text-slate-700">{item}</span>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        {/* Why This Works */}
+        <section className="mb-20 border-2 border-blue-200 bg-blue-50 rounded-lg p-12">
+          <h2 className="text-2xl font-bold text-slate-900 mb-6 flex items-center gap-3">
+            <span className="material-icons text-blue-600">verified</span>
+            Why This Works
+          </h2>
+          <p className="text-lg text-slate-700 leading-relaxed">
+            Most freelancers fail from lack of systems, not lack of skill. This guide organizes everything you need in one place: how to position yourself, price confidently, find clients through multiple channels, close deals, protect yourself with contracts, deliver successfully, and build recurring revenue. Each module builds on the last, creating a complete blueprint.
+          </p>
+        </section>
+
+        {/* Course Details */}
+        <section className="mb-20 grid md:grid-cols-2 gap-8">
+          <div className="bg-white border border-slate-200 rounded-lg p-8">
+            <h3 className="text-lg font-bold text-slate-900 mb-4 flex items-center gap-2">
+              <span className="material-icons text-blue-600">info</span>
+              Free Modules (1-3)
+            </h3>
+            <ul className="space-y-2 text-slate-600">
+              <li>✓ Mindset & Market Reality</li>
+              <li>✓ Skills, Tools & Tech Stack</li>
+              <li>✓ Portfolio That Converts</li>
+            </ul>
+            <Link href="/free-course">
+              <button className="w-full mt-6 px-4 py-3 bg-slate-100 hover:bg-slate-200 text-slate-900 font-semibold rounded-lg transition">
+                Start Free
+              </button>
+            </Link>
+          </div>
+          
+          <div className="bg-white border-2 border-blue-500 rounded-lg p-8">
+            <h3 className="text-lg font-bold text-slate-900 mb-4 flex items-center gap-2">
+              <span className="material-icons text-blue-600">star</span>
+              Full Course (All 8)
+            </h3>
+            <p className="text-3xl font-bold text-blue-600 mb-2">$27</p>
+            <p className="text-slate-600 mb-4">Lifetime access • PDF + Online • All future updates</p>
+            <Link href="/paid-course">
+              <button className="w-full px-4 py-3 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-lg transition">
+                View Full Course
+              </button>
+            </Link>
+          </div>
+        </section>
+
+
       </div>
 
       {/* Footer */}
-      <footer className="max-w-3xl mx-auto px-6 py-12 text-sm text-gray-500 border-t border-gray-200 mt-12">
-        <div className="mb-4">© {new Date().getFullYear()} The Complete Freelance Web Design & Development Course</div>
-        <p className="text-xs text-gray-400">Built for freelancers. Designed to help you build a sustainable business.</p>
+      <footer className="bg-slate-900 text-slate-300 py-12 mt-20">
+        <div className="max-w-4xl mx-auto px-6">
+          <div className="flex justify-between items-center mb-8">
+            <div>
+              <h3 className="text-lg font-bold text-white mb-2">Freelance Business Course</h3>
+              <p className="text-sm">A practical guide to building a sustainable, profitable freelance business.</p>
+            </div>
+            <div className="text-right">
+              <Link href="/free-course" className="text-blue-400 hover:text-blue-300 block mb-2">
+                Free Course
+              </Link>
+              <Link href="/paid-course" className="text-blue-400 hover:text-blue-300 block">
+                Full Course
+              </Link>
+            </div>
+          </div>
+          <div className="border-t border-slate-700 pt-6 text-sm flex justify-between items-center">
+            <p>© {new Date().getFullYear()} The Complete Freelance Web Design & Development Course</p>
+            <div className="space-x-4">
+              <Link href="/terms" className="text-blue-400 hover:text-blue-300">
+                Terms & Conditions
+              </Link>
+              <Link href="/privacy" className="text-blue-400 hover:text-blue-300">
+                Privacy Policy
+              </Link>
+              <Link href="/refund" className="text-blue-400 hover:text-blue-300">
+                Refund Policy
+              </Link>
+              <Link href="/contact" className="text-blue-400 hover:text-blue-300">
+                Contact Page
+              </Link>
+            </div>
+          </div>
+        </div>
       </footer>
     </div>
   )
