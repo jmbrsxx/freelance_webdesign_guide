@@ -70,7 +70,7 @@ export default async function handler(
           </div>
         </div>
       `,
-      reply_to: email,
+      replyTo: email,
     });
 
     if (result.error) {
