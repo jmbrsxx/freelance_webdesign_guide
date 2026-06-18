@@ -2,8 +2,6 @@
 
 import React, { useState } from 'react';
 import Link from 'next/link';
-import { StripeProvider } from '../components/StripeProvider';
-import { PaymentForm } from '../components/PaymentForm';
 
 const MaterialIcon = ({ name }: { name: string }) => (
   <span className="material-icons align-middle">{name}</span>
@@ -15,32 +13,13 @@ const MaterialIconOutlined = ({ name }: { name: string }) => (
 
 export default function PaidCoursePage() {
   const [paymentSuccess, setPaymentSuccess] = useState(false);
-  const [email, setEmail] = useState('');
-  const [emailError, setEmailError] = useState('');
-
-  const validateEmail = (value: string) => {
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailRegex.test(value)) {
-      setEmailError('Please enter a valid email address');
-      return false;
-    }
-    setEmailError('');
-    return true;
-  };
-
-  const handleEmailChange = (value: string) => {
-    setEmail(value);
-    if (value.length > 0) {
-      validateEmail(value);
-    }
-  };
 
   if (paymentSuccess) {
     const handleDownload = () => {
       // Trigger download of course materials
       const link = document.createElement('a');
       link.href = '/api/download-course';
-      link.download = 'Freelance_Web_Design_Course.pdf';
+      link.download = 'Freelance_Web_Design_Full_Course.pdf';
       document.body.appendChild(link);
       link.click();
       document.body.removeChild(link);
@@ -130,7 +109,7 @@ export default function PaidCoursePage() {
 
           <div className="mt-8 p-4 bg-gray-50 rounded text-center">
             <p className="text-sm text-gray-600">
-              Questions? Email us at <span className="font-bold">support@course.com</span>
+              Questions? <a href="/contact" className="text-blue-600 hover:text-blue-700 font-semibold">Email us here</a>
             </p>
           </div>
         </div>
@@ -139,8 +118,7 @@ export default function PaidCoursePage() {
   }
 
   return (
-    <StripeProvider>
-      <div className="min-h-screen bg-gradient-to-b from-slate-50 to-white">
+    <div className="min-h-screen bg-gradient-to-b from-slate-50 to-white">
         {/* Navigation */}
         <nav className="border-b border-slate-200 bg-white sticky top-0 z-50">
           <div className="max-w-4xl mx-auto px-6 py-4">
@@ -154,68 +132,39 @@ export default function PaidCoursePage() {
         {/* Main Content */}
         <div className="max-w-4xl mx-auto px-6 py-16">
         
-        {/* Payment Section */}
-        <div className="mb-16 bg-gradient-to-br from-slate-50 to-slate-100 rounded-lg shadow-lg p-8">
-          <div className="flex items-center gap-3 mb-6">
-            <div className="p-2 bg-blue-100 rounded">
+        {/* Payment CTA Section */}
+        <div className="mb-16 bg-gradient-to-br from-blue-50 to-indigo-50 rounded-lg shadow-lg p-8 text-center">
+          <div className="flex items-center justify-center gap-3 mb-6">
+            <div className="p-3 bg-blue-100 rounded-full">
               <MaterialIcon name="shopping_cart" />
             </div>
-            <div>
-              <h2 className="text-3xl font-bold text-slate-900">
-                Get Full Course Access
-              </h2>
-              <p className="text-slate-600 text-sm">
-                Complete your purchase below
-              </p>
-            </div>
+          </div>
+          
+          <h2 className="text-3xl font-bold text-slate-900 mb-2">
+            Get Full Course Access
+          </h2>
+          <p className="text-slate-600 mb-4">
+            96 pages • 47 lessons • Complete freelance business blueprint
+          </p>
+          
+          <div className="bg-white rounded-lg p-6 mb-6 inline-block">
+            <p className="text-slate-600 text-sm mb-1">Price</p>
+            <p className="text-4xl font-bold text-slate-900">$27</p>
+            <p className="text-slate-500 text-xs mt-2">One-time payment • Lifetime access</p>
           </div>
 
-          <div className="mb-6">
-            <label className="block text-sm font-medium text-slate-700 mb-2">
-              Email Address
-            </label>
-            <input
-              type="email"
-              value={email}
-              onChange={(e) => handleEmailChange(e.target.value)}
-              placeholder="your@email.com"
-              className={`w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 ${
-                emailError ? 'border-red-500' : 'border-slate-300'
-              }`}
-            />
-            {emailError && (
-              <p className="text-red-500 text-sm mt-1 flex items-center gap-1">
-                <MaterialIcon name="error" />
-                {emailError}
-              </p>
-            )}
-            <p className="text-xs text-slate-500 mt-1">
-              We'll send your course access and confirmation to this email
-            </p>
-          </div>
-
-          {email && !emailError && (
-            <PaymentForm
-              amount={27}
-              courseTitle="Complete Freelance Web Design Course"
-              email={email}
-              onSuccess={() => setPaymentSuccess(true)}
-              onError={(error) => console.error('Payment error:', error)}
-            />
-          )}
-
-          {(!email || emailError) && (
-            <div className="bg-slate-200 p-4 rounded text-center text-slate-600">
-              Enter a valid email to continue
-            </div>
-          )}
-
-          <p className="text-xs text-slate-500 mt-6 text-center">
-            <span className="flex items-center justify-center gap-1 mb-2">
+          <Link
+            href="/checkout"
+            className="inline-block bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-8 rounded-lg transition transform hover:scale-105"
+          >
+            <span className="flex items-center gap-2">
               <MaterialIcon name="lock" />
-              Secure payment via Stripe
+              Proceed to Checkout
             </span>
-            Test mode: Use card <code className="bg-slate-100 px-2 py-1 rounded">4242 4242 4242 4242</code> with any future date and CVC.
+          </Link>
+          
+          <p className="text-xs text-slate-500 mt-6">
+            Secure payment via Stripe • 30-day money-back guarantee
           </p>
         </div>
 
@@ -425,8 +374,7 @@ export default function PaidCoursePage() {
 
 
       </div>
-      </div>
-    </StripeProvider>
+    </div>
   );
 }
 

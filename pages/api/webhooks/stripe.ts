@@ -1,7 +1,7 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
 import Stripe from 'stripe';
 import { buffer } from 'micro';
-import { sendCourseConfirmationEmail, sendRefundEmail } from '../../../lib/email';
+import { sendCourseConfirmationEmail } from '../../../lib/email';
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
   apiVersion: '2026-05-27.dahlia',
@@ -40,63 +40,33 @@ export default async function handler(
 
     // Handle different event types
     switch (event.type) {
-      case 'payment_intent.succeeded': {
-        const paymentIntent = event.data.object as Stripe.PaymentIntent;
-        if (process.env.NODE_ENV === 'development') {
-          console.log('Payment succeeded:', paymentIntent.id);
-        }
+      case 'checkout.session.completed': {
+        const session = event.data.object as Stripe.Checkout.Session;
+        console.log('✅ Checkout session completed:', session.id);
+        console.log('📧 Customer email:', session.customer_email);
 
         // Extract email and courseTitle from metadata
-        const email = paymentIntent.metadata?.email;
-        const courseTitle = paymentIntent.metadata?.courseTitle || 'Freelance Web Design & Development Course';
-        const downloadUrl = paymentIntent.metadata?.downloadUrl || `${process.env.NEXT_PUBLIC_BASE_URL || 'https://yourdomain.com'}/api/download-course?id=${paymentIntent.id}`;
+        const email = session.customer_email || session.metadata?.email;
+        const courseTitle = session.metadata?.courseTitle || 'Freelance Web Design & Development Course';
+        const downloadUrl = `${process.env.NEXT_PUBLIC_BASE_URL || process.env.NEXT_PUBLIC_SITE_URL || 'https://yourdomain.com'}/api/download-course?session_id=${session.id}`;
 
         if (email) {
+          console.log('📧 Sending confirmation email to:', email);
           // Send confirmation email
           const emailResult = await sendCourseConfirmationEmail(
             email,
             courseTitle,
-            paymentIntent.id,
+            session.id,
             downloadUrl
           );
 
-          if (!emailResult.success) {
-            if (process.env.NODE_ENV === 'development') {
-              console.error('Failed to send email:', emailResult.error);
-            }
-            // Log to external service (e.g., Sentry) in production
+          if (emailResult.success) {
+            console.log('✅ Confirmation email sent successfully');
+          } else {
+            console.error('❌ Failed to send email:', emailResult.error);
           }
-        }
-        break;
-      }
-
-      case 'payment_intent.payment_failed': {
-        const paymentIntent = event.data.object as Stripe.PaymentIntent;
-        const email = paymentIntent.metadata?.email;
-
-        if (process.env.NODE_ENV === 'development') {
-          console.log('Payment failed for intent:', paymentIntent.id);
-        }
-        // TODO: Send payment failed notification email
-        break;
-      }
-
-      case 'charge.refunded': {
-        const charge = event.data.object as Stripe.Charge;
-        if (process.env.NODE_ENV === 'development') {
-          console.log('Refund processed:', charge.id);
-        }
-
-        if (charge.metadata?.email) {
-          const refundAmount = charge.amount_refunded / 100; // Convert from cents
-          const courseTitle = charge.metadata?.courseTitle || 'Course';
-
-          await sendRefundEmail(
-            charge.metadata.email,
-            courseTitle,
-            refundAmount,
-            charge.metadata?.refund_reason || 'Requested by customer'
-          );
+        } else {
+          console.error('❌ No email found in session');
         }
         break;
       }

@@ -38,7 +38,7 @@ export default function Refund() {
           <p className="mb-6">We encourage you to review the product description, table of contents, and any preview material available on our Site carefully before purchasing, to make sure the Product fits your needs.</p>
 
           <h2 className="text-2xl font-bold text-slate-900 mt-8 mb-4">Purchase Issues</h2>
-          <p className="mb-6">If you experience a technical problem, such as not receiving your download link, a broken file, or a duplicate/accidental charge, please contact us at <a href="mailto:contact@freelancewebdesign.store" className="text-blue-600 hover:text-blue-700">contact@freelancewebdesign.store</a>. We're happy to help resolve issues related to access or delivery.</p>
+          <p className="mb-6">If you experience a technical problem, such as not receiving your download link, a broken file, or a duplicate/accidental charge, please contact us <Link href="/contact" className="text-blue-600 hover:text-blue-700">Here</Link>. We're happy to help resolve issues related to access or delivery.</p>
 
           <h2 className="text-2xl font-bold text-slate-900 mt-8 mb-4">Questions</h2>
           <p className="mb-6">If you have any questions about this policy before purchasing, reach out via our <Link href="/contact" className="text-blue-600 hover:text-blue-700">Contact page</Link>.</p>

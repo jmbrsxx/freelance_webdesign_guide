@@ -40,7 +40,7 @@ export default function Terms() {
           <p className="mb-6">All prices are listed in dollars and are processed securely through our third-party payment provider. By completing a purchase, you confirm that you are authorized to use the payment method provided.</p>
 
           <h2 className="text-2xl font-bold text-slate-900 mt-8 mb-4">4. Delivery</h2>
-          <p className="mb-6">Access to the Product is provided digitally and immediately after successful payment. If you do not receive your download link by email within a reasonable time, please contact us at <a href="mailto:contact@freelancewebdesign.store" className="text-blue-600 hover:text-blue-700">contact@freelancewebdesign.store</a> so we can assist you.</p>
+          <p className="mb-6">Access to the Product is provided digitally and immediately after successful payment. If you do not receive your download link by email within a reasonable time, please contact us <Link href="/contact" className="text-blue-600 hover:text-blue-700">here</Link> so we can assist you.</p>
 
           <h2 className="text-2xl font-bold text-slate-900 mt-8 mb-4">5. No Professional Guarantee</h2>
           <p className="mb-6">The Product is an educational guide based on the creator's knowledge and experience in freelance web design. It does not constitute professional, legal, financial, or business advice, and no specific income, client, or career results are guaranteed. Your results depend on your own effort, market conditions, and other factors outside our control.</p>
@@ -61,7 +61,7 @@ export default function Terms() {
           <p className="mb-6">These Terms are governed by the laws of the Federative Republic of Brazil. Any disputes shall be resolved under Brazilian jurisdiction.</p>
 
           <h2 className="text-2xl font-bold text-slate-900 mt-8 mb-4">11. Contact</h2>
-          <p className="mb-6">Questions about these Terms can be sent to <a href="mailto:contact@freelancewebdesign.store" className="text-blue-600 hover:text-blue-700">contact@freelancewebdesign.store</a> or through our <Link href="/contact" className="text-blue-600 hover:text-blue-700">Contact page</Link>.</p>
+          <p className="mb-6">Questions about these Terms can be sent through our <Link href="/contact" className="text-blue-600 hover:text-blue-700">Contact page</Link>.</p>
         </div>
       </div>
 

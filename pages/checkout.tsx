@@ -1,17 +1,61 @@
 'use client';
 
-import React, { useState } from 'react';
-import { StripeProvider } from '../components/StripeProvider';
-import { PaymentForm } from '../components/PaymentForm';
+import React, { useState, useEffect } from 'react';
 
 const MaterialIcon = ({ name }: { name: string }) => (
   <span className="material-icons align-middle">{name}</span>
 )
 
 export default function CheckoutPage() {
-  const [paymentSuccess, setPaymentSuccess] = useState(false);
+  // Detect session_id from URL on initial load
+  const [hasSessionId] = useState(() => {
+    if (typeof window !== 'undefined') {
+      const params = new URLSearchParams(window.location.search);
+      return !!params.get('session_id');
+    }
+    return false;
+  });
+
+  const [mounted, setMounted] = useState(false);
+  const [paymentSuccess, setPaymentSuccess] = useState(hasSessionId);
   const [email, setEmail] = useState('');
   const [emailError, setEmailError] = useState('');
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    // Check for session_id in URL after component mounts
+    const params = new URLSearchParams(window.location.search);
+    const sessionId = params.get('session_id');
+    console.log('🔍 Checking for session_id:', sessionId);
+    if (sessionId) {
+      console.log('✅ Payment successful! Session ID:', sessionId);
+      setPaymentSuccess(true);
+    } else {
+      console.log('❌ No session_id found in URL:', window.location.search);
+    }
+    setMounted(true);
+  }, []);
+
+  const handleDownload = () => {
+    // Trigger download of course materials
+    const link = document.createElement('a');
+    link.href = '/api/download-course';
+    link.download = 'Freelance_Web_Design_Full_Course.pdf';
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  };
+
+  // Auto-download PDF when payment succeeds
+  useEffect(() => {
+    if (paymentSuccess && mounted) {
+      const timer = setTimeout(() => {
+        handleDownload();
+      }, 1500); // Wait 1.5s for page to load, then auto-download
+      return () => clearTimeout(timer);
+    }
+  }, [paymentSuccess, mounted]);
 
   const validateEmail = (value: string) => {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -31,16 +75,6 @@ export default function CheckoutPage() {
   };
 
   if (paymentSuccess) {
-    const handleDownload = () => {
-      // Trigger download of course materials
-      const link = document.createElement('a');
-      link.href = '/api/download-course';
-      link.download = 'Freelance_Web_Design_Course.pdf';
-      document.body.appendChild(link);
-      link.click();
-      document.body.removeChild(link);
-    };
-
     return (
       <div className="min-h-screen bg-gradient-to-br from-green-50 to-blue-50 flex items-center justify-center p-4">
         <div className="bg-white rounded-lg shadow-lg p-8 max-w-2xl w-full">
@@ -125,7 +159,7 @@ export default function CheckoutPage() {
 
           <div className="mt-8 p-4 bg-gray-50 rounded text-center">
             <p className="text-sm text-gray-600">
-              Questions? Email us at <span className="font-bold">support@course.com</span>
+              Questions? <a href="/contact" className="text-blue-600 hover:text-blue-700 font-semibold">Email us here</a>
             </p>
           </div>
         </div>
@@ -134,9 +168,8 @@ export default function CheckoutPage() {
   }
 
   return (
-    <StripeProvider>
-      <div className="min-h-screen bg-gradient-to-br from-slate-50 to-slate-100 flex items-center justify-center p-4">
-        <div className="bg-white rounded-lg shadow-lg p-8 max-w-md w-full">
+    <div className="min-h-screen bg-gradient-to-br from-slate-50 to-slate-100 flex items-center justify-center p-4">
+      <div className="bg-white rounded-lg shadow-lg p-8 max-w-md w-full">
           <div className="flex items-center gap-3 mb-6">
             <div className="p-2 bg-blue-100 rounded">
               <MaterialIcon name="shopping_cart" />
@@ -176,13 +209,55 @@ export default function CheckoutPage() {
           </div>
 
           {email && !emailError && (
-            <PaymentForm
-              amount={27} // $27.00
-              courseTitle="Complete Freelance Web Design Course"
-              email={email}
-              onSuccess={() => setPaymentSuccess(true)}
-              onError={(error) => console.error('Payment error:', error)}
-            />
+            <button
+              onClick={async (e) => {
+                e.preventDefault();
+                if (loading) return; // Prevent double-click
+                setLoading(true);
+                setError(null);
+                try {
+                  const response = await fetch('/api/create-checkout-session', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                      email,
+                      courseTitle: 'Freelance Web Design & Development Course',
+                    }),
+                  });
+
+                  if (!response.ok) {
+                    const errorData = await response.json();
+                    throw new Error(errorData.error || 'Failed to create checkout session');
+                  }
+
+                  const { url } = await response.json();
+                  if (url) {
+                    // Disable button and show message before redirect
+                    setLoading(false);
+                    // Add small delay to ensure button is disabled before redirect
+                    setTimeout(() => {
+                      window.location.href = url;
+                    }, 100);
+                    return;
+                  }
+                } catch (err) {
+                  const message = err instanceof Error ? err.message : 'Checkout failed';
+                  setError(message);
+                } finally {
+                  setLoading(false);
+                }
+              }}
+              disabled={loading}
+              className="w-full bg-blue-600 text-white font-bold py-3 px-6 rounded-lg hover:bg-blue-700 disabled:bg-gray-400 disabled:cursor-not-allowed transition"
+            >
+              {loading ? 'Redirecting to Stripe...' : 'Proceed to Payment ($27.00)'}
+            </button>
+          )}
+
+          {error && (
+            <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded mt-4">
+              {error}
+            </div>
           )}
 
           {(!email || emailError) && (
@@ -196,10 +271,9 @@ export default function CheckoutPage() {
               <MaterialIcon name="lock" />
               Secure payment via Stripe
             </span>
-            Test mode: Use card <code className="bg-slate-100 px-2 py-1 rounded">4242 4242 4242 4242</code> with any future date and CVC.
+            Test mode: Use card <code className="bg-slate-100 px-2 py-1 rounded">4242 4242 4242 4242</code>, any future expiry, and any 3-digit CVC.
           </p>
         </div>
       </div>
-    </StripeProvider>
   );
 }

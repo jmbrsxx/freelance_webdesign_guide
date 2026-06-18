@@ -63,7 +63,7 @@ export default function Privacy() {
           <p className="mb-6">We take reasonable measures to protect your personal information against unauthorized access, alteration, or disclosure. However, no method of transmission over the internet is 100% secure.</p>
 
           <h2 className="text-2xl font-bold text-slate-900 mt-8 mb-4">6. Your Rights</h2>
-          <p className="mb-6">Depending on your location, you may have rights to access, correct, or request deletion of your personal data. To exercise these rights, contact us at <a href="mailto:contact@freelancewebdesign.store" className="text-blue-600 hover:text-blue-700">contact@freelancewebdesign.store</a>. If you are located in Brazil, these rights are provided in accordance with the Lei Geral de Proteção de Dados (LGPD).</p>
+          <p className="mb-6">Depending on your location, you may have rights to access, correct, or request deletion of your personal data. To exercise these rights, contact us <Link href="/contact" className="text-blue-600 hover:text-blue-700">Here.</Link> If you are located in Brazil, these rights are provided in accordance with the Lei Geral de Proteção de Dados (LGPD).</p>
 
           <h2 className="text-2xl font-bold text-slate-900 mt-8 mb-4">7. Cookies</h2>
           <p className="mb-6">Our Site may use cookies or similar technologies to improve your browsing experience and understand Site traffic. You can control cookies through your browser settings.</p>
@@ -75,7 +75,7 @@ export default function Privacy() {
           <p className="mb-6">We may update this Privacy Policy periodically. Changes will be posted on this page with an updated revision date.</p>
 
           <h2 className="text-2xl font-bold text-slate-900 mt-8 mb-4">10. Contact</h2>
-          <p className="mb-6">For privacy-related questions, contact us at <a href="mailto:contact@freelancewebdesign.store" className="text-blue-600 hover:text-blue-700">contact@freelancewebdesign.store</a> or through our <Link href="/contact" className="text-blue-600 hover:text-blue-700">Contact page</Link>.</p>
+          <p className="mb-6">For privacy-related questions, contact us through our <Link href="/contact" className="text-blue-600 hover:text-blue-700">Contact page</Link>.</p>
         </div>
       </div>
 

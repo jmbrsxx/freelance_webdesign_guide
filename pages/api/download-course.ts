@@ -35,7 +35,7 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
     res.setHeader('Content-Type', 'application/pdf');
     res.setHeader(
       'Content-Disposition',
-      'attachment; filename="Freelance_Web_Design_Course.pdf"'
+      'attachment; filename="Freelance_Web_Design_Full_Course.pdf"'
     );
     res.setHeader('Content-Length', stats.size);
     res.setHeader('Cache-Control', 'no-cache, no-store, must-revalidate');

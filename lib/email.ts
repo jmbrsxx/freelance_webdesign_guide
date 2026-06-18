@@ -72,20 +72,13 @@ export async function sendCourseConfirmationEmail(
               </p>
             </div>
 
-            <div style="background: #f5f3ff; padding: 20px; margin: 24px 0; border-radius: 8px;">
-              <h3 style="color: #5b21b6; margin: 0 0 12px 0; font-size: 14px; font-weight: 600;">❓ Need Help?</h3>
-              <p style="color: #6b7280; font-size: 14px; margin: 0; line-height: 1.6;">
-                If you have any questions or encounter any issues downloading your course, reply to this email or contact us at <a href="mailto:contact@freelancewebdesign.store" style="color: #2563eb; text-decoration: none; font-weight: 500;">contact@freelancewebdesign.store</a>. We typically respond within 24 hours.
-              </p>
-            </div>
-
             <hr style="border: none; border-top: 1px solid #e5e7eb; margin: 30px 0; height: 0;">
             
             <p style="color: #6b7280; font-size: 12px; text-align: center; margin: 0; line-height: 1.6;">
               © 2026 Digital Solutions. All rights reserved.<br>
-              <a href="https://digitalsolutions.io/terms" style="color: #2563eb; text-decoration: none;">Terms</a> • 
-              <a href="https://digitalsolutions.io/privacy" style="color: #2563eb; text-decoration: none;">Privacy</a> • 
-              <a href="https://digitalsolutions.io/contact" style="color: #2563eb; text-decoration: none;">Contact</a>
+              <a href="https://www.freelancewebdesign.store/terms" style="color: #2563eb; text-decoration: none;">Terms</a> • 
+              <a href="https://www.freelancewebdesign.store/privacy" style="color: #2563eb; text-decoration: none;">Privacy</a> • 
+              <a href="https://www.freelancewebdesign.store/contact" style="color: #2563eb; text-decoration: none;">Contact</a>
             </p>
           </div>
         </div>
@@ -101,71 +94,6 @@ export async function sendCourseConfirmationEmail(
     return { success: true, messageId: result.data?.id };
   } catch (error) {
     console.error('Failed to send email:', error);
-    return { success: false, error };
-  }
-}
-
-export async function sendRefundEmail(
-  email: string,
-  courseTitle: string,
-  refundAmount: number,
-  reason: string
-) {
-  try {
-    const result = await resend.emails.send({
-      from: 'contact@freelancewebdesign.store',
-      to: email,
-      subject: `Refund Processed: ${courseTitle}`,
-      html: `
-        <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', sans-serif; max-width: 600px; margin: 0 auto; background: #ffffff;">
-          <div style="background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%); padding: 40px; text-align: center; border-radius: 8px 8px 0 0;">
-            <h1 style="color: white; margin: 0; font-size: 28px; font-weight: bold;">💰 Refund Processed</h1>
-          </div>
-          
-          <div style="background: #f9fafb; padding: 40px; border-radius: 0 0 8px 8px;">
-            <p style="color: #1f2937; font-size: 16px; margin: 0 0 20px 0; line-height: 1.5;">
-              Your refund for <strong>${courseTitle}</strong> has been processed.
-            </p>
-
-            <div style="background: white; border-left: 4px solid #f59e0b; padding: 20px; margin: 20px 0; border-radius: 4px;">
-              <h3 style="color: #d97706; margin: 0 0 12px 0; font-size: 14px; font-weight: 600;">Refund Details</h3>
-              <p style="color: #374151; font-size: 14px; margin: 0 0 8px 0;">
-                <strong>Amount:</strong> $${refundAmount.toFixed(2)}
-              </p>
-              <p style="color: #374151; font-size: 14px; margin: 0 0 12px 0;">
-                <strong>Reason:</strong> ${reason}
-              </p>
-              <p style="color: #6b7280; font-size: 13px; margin: 0; line-height: 1.6;">
-                The refund may take 3-5 business days to appear in your account depending on your bank.
-              </p>
-            </div>
-
-            <div style="background: #eff6ff; border-left: 4px solid #2563eb; padding: 20px; margin: 20px 0; border-radius: 4px;">
-              <h3 style="color: #1e40af; margin: 0 0 8px 0; font-size: 14px; font-weight: 600;">Questions?</h3>
-              <p style="color: #374151; font-size: 14px; margin: 0; line-height: 1.6;">
-                If you have any questions, please reach out to us at <a href="mailto:contact@freelancewebdesign.store" style="color: #2563eb; text-decoration: none; font-weight: 500;">contact@freelancewebdesign.store</a>
-              </p>
-            </div>
-
-            <hr style="border: none; border-top: 1px solid #e5e7eb; margin: 30px 0; height: 0;">
-            
-            <p style="color: #6b7280; font-size: 12px; text-align: center; margin: 0; line-height: 1.6;">
-              © 2026 Digital Solutions. All rights reserved.
-            </p>
-          </div>
-        </div>
-      `,
-    });
-
-    if (result.error) {
-      console.error('Resend error:', result.error);
-      return { success: false, error: result.error };
-    }
-
-    console.log('✅ Refund email sent to:', email);
-    return { success: true, messageId: result.data?.id };
-  } catch (error) {
-    console.error('Failed to send refund email:', error);
     return { success: false, error };
   }
 }
