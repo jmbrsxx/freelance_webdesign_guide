@@ -40,6 +40,10 @@ export default async function handler(
       return res.status(400).json({ error: 'Message must be at least 10 characters long' });
     }
 
+    if (message.trim().length > 5000) {
+      return res.status(400).json({ error: 'Message must be less than 5000 characters' });
+    }
+
     // Send email to admin
     const result = await resend.emails.send({
       from: 'contact@freelancewebdesign.store',
@@ -57,9 +61,9 @@ export default async function handler(
               <p style="color: #1f2937; font-size: 16px; margin: 0; font-weight: 500;">${email}</p>
             </div>
 
-            <div style="background: white; border: 1px solid #e5e7eb; padding: 20px; border-radius: 6px; margin-bottom: 20px;">
+            <div style="background: white; border: 1px solid #e5e7eb; padding: 20px; border-radius: 6px; margin-bottom: 20px; word-break: break-word; overflow-wrap: break-word;">
               <p style="color: #6b7280; font-size: 13px; margin: 0 0 12px 0; text-transform: uppercase; font-weight: 600;">Message</p>
-              <p style="color: #1f2937; font-size: 14px; margin: 0; line-height: 1.6; white-space: pre-wrap;">${message}</p>
+              <p style="color: #1f2937; font-size: 14px; margin: 0; line-height: 1.6; white-space: pre-wrap; word-break: break-word; overflow-wrap: break-word; max-width: 100%;">${message.replace(/</g, '&lt;').replace(/>/g, '&gt;')}</p>
             </div>
 
             <div style="background: #f3f4f6; padding: 15px; border-radius: 6px; text-align: center;">

@@ -5,8 +5,8 @@ const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
   apiVersion: '2026-05-27.dahlia',
 });
 
-// Fixed course price in cents ($97.00 = 9700 cents)
-const COURSE_PRICE_CENTS = 9700;
+// Fixed course price in cents ($1.00 = 100 cents)
+const COURSE_PRICE_CENTS = 100;
 
 type ResponseData = {
   clientSecret?: string;

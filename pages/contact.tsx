@@ -121,9 +121,12 @@ export default function Contact() {
                     required
                     disabled={loading}
                     rows={6}
+                    maxLength={5000}
                     className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent disabled:bg-slate-100 resize-none"
                   />
-                  <p className="text-sm text-slate-500 mt-1">Minimum 10 characters</p>
+                  <p className="text-sm text-slate-500 mt-1">
+                    Minimum 10 characters • {formData.message.length}/5000 characters
+                  </p>
                 </div>
 
                 <button

@@ -20,7 +20,7 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
     // Path to the course PDF
     const filePath = path.join(
       process.cwd(),
-      'Freelance_Web_Design_Course free course.pdf'
+      'Freelance_Web_Design_Full_Course.pdf'
     );
 
     // Check if file exists
