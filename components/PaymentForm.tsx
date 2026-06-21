@@ -26,6 +26,7 @@ export function PaymentForm({
   const elements = useElements();
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [currency, setCurrency] = useState<'usd' | 'brl'>('usd');
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -46,6 +47,7 @@ export function PaymentForm({
         body: JSON.stringify({
           email,
           courseTitle,
+          currency,
         }),
       });
 
@@ -72,8 +74,22 @@ export function PaymentForm({
       });
 
       if (result.error) {
-        setError(result.error.message || 'Payment failed');
-        onError?.(result.error.message || 'Payment failed');
+        const errorMessage = result.error.message || 'Payment failed';
+        
+        // Handle Brazilian card restriction
+        if (
+          errorMessage.includes('Brazilian cards') ||
+          errorMessage.includes('not supported for this currency') ||
+          (result.error.code === 'card_declined' && currency === 'usd')
+        ) {
+          setError(
+            'Your Brazilian card can only be charged in BRL. Please try again with the BRL option.'
+          );
+          setCurrency('brl');
+        } else {
+          setError(errorMessage);
+        }
+        onError?.(errorMessage);
       } else if (result.paymentIntent?.status === 'succeeded') {
         console.log('✅ Payment successful:', result.paymentIntent.id);
         onSuccess?.();
@@ -87,8 +103,40 @@ export function PaymentForm({
     }
   };
 
+  const getDisplayAmount = () => {
+    if (currency === 'brl') {
+      return 'R$ 5,00';
+    }
+    return `$${amount.toFixed(2)}`;
+  };
+
   return (
     <form onSubmit={handleSubmit} className="space-y-4">
+      <div className="flex gap-2 mb-4">
+        <button
+          type="button"
+          onClick={() => setCurrency('usd')}
+          className={`flex-1 py-2 px-4 rounded font-semibold transition-colors ${
+            currency === 'usd'
+              ? 'bg-blue-600 text-white'
+              : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
+          }`}
+        >
+          USD ($1.00)
+        </button>
+        <button
+          type="button"
+          onClick={() => setCurrency('brl')}
+          className={`flex-1 py-2 px-4 rounded font-semibold transition-colors ${
+            currency === 'brl'
+              ? 'bg-blue-600 text-white'
+              : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
+          }`}
+        >
+          BRL (R$5,00)
+        </button>
+      </div>
+
       <div className="bg-white p-4 rounded border border-gray-300">
         <CardElement
           options={{
@@ -116,7 +164,10 @@ export function PaymentForm({
 
       <div className="bg-gray-50 p-4 rounded">
         <p className="text-sm text-gray-600">
-          <strong>Amount:</strong> ${amount.toFixed(2)}
+          <strong>Amount:</strong> {getDisplayAmount()}
+        </p>
+        <p className="text-sm text-gray-600">
+          <strong>Currency:</strong> {currency.toUpperCase()}
         </p>
         <p className="text-sm text-gray-600">
           <strong>Course:</strong> {courseTitle}
@@ -128,7 +179,7 @@ export function PaymentForm({
         disabled={!stripe || loading}
         className="w-full bg-blue-600 text-white font-bold py-2 px-4 rounded hover:bg-blue-700 disabled:bg-gray-400 disabled:cursor-not-allowed"
       >
-        {loading ? 'Processing...' : `Pay $${amount.toFixed(2)}`}
+        {loading ? 'Processing...' : `Pay ${getDisplayAmount()}`}
       </button>
     </form>
   );

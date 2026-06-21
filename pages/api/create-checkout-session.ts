@@ -5,8 +5,11 @@ const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
   apiVersion: '2026-05-27.dahlia',
 });
 
-// Fixed course price in cents ($1.00 = 100 cents)
-const COURSE_PRICE_CENTS = 100;
+// Stripe Adaptive Pricing reference
+// Price object must be created once in Stripe Dashboard (or via a setup script)
+// with Adaptive Pricing enabled in Dashboard > Settings > Payments > Adaptive Pricing.
+// Stripe then auto-converts this price to the customer's local currency at checkout.
+const COURSE_PRICE_ID = process.env.STRIPE_COURSE_PRICE_ID!;
 
 type ResponseData = {
   url?: string;
@@ -40,19 +43,12 @@ export default async function handler(
     // Determine base URL
     const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000';
     
-    // Create checkout session
+    // Create checkout session with Adaptive Pricing
     const session = await stripe.checkout.sessions.create({
       payment_method_types: ['card'],
       line_items: [
         {
-          price_data: {
-            currency: 'usd',
-            product_data: {
-              name: courseTitle || 'Freelance Web Design & Development Course',
-              description: 'Complete freelance web design and development course with 47 lessons',
-            },
-            unit_amount: COURSE_PRICE_CENTS,
-          },
+          price: COURSE_PRICE_ID,
           quantity: 1,
         },
       ],

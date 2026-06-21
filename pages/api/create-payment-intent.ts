@@ -5,8 +5,10 @@ const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
   apiVersion: '2026-05-27.dahlia',
 });
 
-// Fixed course price in cents ($1.00 = 100 cents)
-const COURSE_PRICE_CENTS = 100;
+// Fixed course price - supports both USD and BRL
+// USD: $1.00 = 100 cents, BRL: R$5.00 = 500 cents (approximate 1:5 ratio)
+const COURSE_PRICE_USD_CENTS = 100;
+const COURSE_PRICE_BRL_CENTS = 500;
 
 type ResponseData = {
   clientSecret?: string;
@@ -29,7 +31,14 @@ export default async function handler(
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
 
   try {
-    const { email, courseTitle } = req.body;
+    const { email, courseTitle, currency = 'usd' } = req.body;
+
+    // Validate currency
+    const validCurrencies = ['usd', 'brl'];
+    const selectedCurrency = currency.toLowerCase();
+    if (!validCurrencies.includes(selectedCurrency)) {
+      return res.status(400).json({ error: 'Invalid currency. Supported: USD, BRL' });
+    }
 
     // Validate email
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -37,11 +46,14 @@ export default async function handler(
       return res.status(400).json({ error: 'Invalid email address' });
     }
 
+    // Determine amount based on currency
+    const amount = selectedCurrency === 'brl' ? COURSE_PRICE_BRL_CENTS : COURSE_PRICE_USD_CENTS;
+
     // Create payment intent with server-controlled amount
     // Client cannot manipulate the price
     const paymentIntent = await stripe.paymentIntents.create({
-      amount: COURSE_PRICE_CENTS, // Always use fixed price
-      currency: 'usd',
+      amount,
+      currency: selectedCurrency,
       payment_method_types: ['card'],
       metadata: {
         email,
