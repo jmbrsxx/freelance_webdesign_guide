@@ -22,6 +22,7 @@ export default function CheckoutPage() {
   const [emailError, setEmailError] = useState('');
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [currency, setCurrency] = useState<'usd' | 'brl'>('usd');
 
   useEffect(() => {
     // Check for session_id in URL after component mounts
@@ -185,9 +186,36 @@ export default function CheckoutPage() {
           </div>
 
           <div className="mb-6">
-            <label className="block text-sm font-medium text-slate-700 mb-2">
-              Email Address
+            <label className="block text-sm font-medium text-slate-700 mb-3">
+              Select Currency
             </label>
+            <div className="flex gap-3">
+              <button
+                type="button"
+                onClick={() => setCurrency('usd')}
+                className={`flex-1 py-2 px-4 rounded-lg font-semibold transition-colors ${
+                  currency === 'usd'
+                    ? 'bg-blue-600 text-white'
+                    : 'bg-slate-100 text-slate-700 hover:bg-slate-200'
+                }`}
+              >
+                USD ($27.00)
+              </button>
+              <button
+                type="button"
+                onClick={() => setCurrency('brl')}
+                className={`flex-1 py-2 px-4 rounded-lg font-semibold transition-colors ${
+                  currency === 'brl'
+                    ? 'bg-blue-600 text-white'
+                    : 'bg-slate-100 text-slate-700 hover:bg-slate-200'
+                }`}
+              >
+                BRL (R$135.00)
+              </button>
+            </div>
+          </div>
+
+          <div className="mb-6">
             <input
               type="email"
               value={email}
@@ -222,6 +250,7 @@ export default function CheckoutPage() {
                     body: JSON.stringify({
                       email,
                       courseTitle: 'Freelance Web Design & Development Course',
+                      currency,
                     }),
                   });
 
@@ -250,7 +279,7 @@ export default function CheckoutPage() {
               disabled={loading}
               className="w-full bg-blue-600 text-white font-bold py-3 px-6 rounded-lg hover:bg-blue-700 disabled:bg-gray-400 disabled:cursor-not-allowed transition"
             >
-              {loading ? 'Redirecting to Stripe...' : 'Proceed to Payment ($27.00)'}
+              {loading ? 'Redirecting to Stripe...' : `Proceed to Payment (${currency === 'brl' ? 'R$135.00' : '$27.00'})`}
             </button>
           )}
 

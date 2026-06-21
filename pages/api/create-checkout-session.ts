@@ -5,11 +5,12 @@ const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
   apiVersion: '2026-05-27.dahlia',
 });
 
-// Stripe Adaptive Pricing reference
-// Price object must be created once in Stripe Dashboard (or via a setup script)
-// with Adaptive Pricing enabled in Dashboard > Settings > Payments > Adaptive Pricing.
-// Stripe then auto-converts this price to the customer's local currency at checkout.
-const COURSE_PRICE_ID = process.env.STRIPE_COURSE_PRICE_ID!;
+// Stripe Price IDs for different currencies
+// Create these via scripts/setup-stripe-price.ts and set in .env.local
+const COURSE_PRICE_IDS: { [key: string]: string } = {
+  usd: process.env.STRIPE_COURSE_PRICE_ID_USD!,
+  brl: process.env.STRIPE_COURSE_PRICE_ID_BRL!,
+};
 
 type ResponseData = {
   url?: string;
@@ -32,7 +33,15 @@ export default async function handler(
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
 
   try {
-    const { email, courseTitle } = req.body;
+    const { email, courseTitle, currency = 'usd' } = req.body;
+
+    // Validate currency
+    const selectedCurrency = currency.toLowerCase().trim();
+    if (!COURSE_PRICE_IDS[selectedCurrency]) {
+      return res.status(400).json({ 
+        error: `Unsupported currency: ${selectedCurrency}. Supported: ${Object.keys(COURSE_PRICE_IDS).join(', ').toUpperCase()}` 
+      });
+    }
 
     // Validate email
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -43,12 +52,15 @@ export default async function handler(
     // Determine base URL
     const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000';
     
-    // Create checkout session with Adaptive Pricing
+    // Get the price ID for the selected currency
+    const priceId = COURSE_PRICE_IDS[selectedCurrency];
+    
+    // Create checkout session with the appropriate price
     const session = await stripe.checkout.sessions.create({
       payment_method_types: ['card'],
       line_items: [
         {
-          price: COURSE_PRICE_ID,
+          price: priceId,
           quantity: 1,
         },
       ],
@@ -59,13 +71,15 @@ export default async function handler(
       metadata: {
         email,
         courseTitle: courseTitle || 'Freelance Web Design & Development Course',
+        currency: selectedCurrency,
       },
     });
 
     if (process.env.NODE_ENV === 'development') {
       console.log('✅ Checkout session created:', session.id);
       console.log('📧 Customer email:', email);
-      console.log('🔗 Success URL:', `${baseUrl}/checkout?session_id=${session.id}`);
+      console.log('� Currency:', selectedCurrency.toUpperCase());
+      console.log('�🔗 Success URL:', `${baseUrl}/checkout?session_id=${session.id}`);
     }
 
     res.status(200).json({ url: session.url ?? undefined });
