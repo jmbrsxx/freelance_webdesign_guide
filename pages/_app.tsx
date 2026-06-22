@@ -13,6 +13,8 @@ export default function App({ Component, pageProps }: AppProps) {
         <link rel="icon" href="/favicon.ico" />
         <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
         <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" />
+        <meta property="og:image" content="https://raw.githubusercontent.com/jmbrsxx/freelance_webdesign_guide/refs/heads/main/public/preview-image.png" />
+        <meta name="twitter:image" content="https://raw.githubusercontent.com/jmbrsxx/freelance_webdesign_guide/refs/heads/main/public/preview-image.png" />
       </Head>
       <main className={`${inter.className} overflow-x-hidden`}>
         <Component {...pageProps} />
