@@ -16,6 +16,7 @@ body {
   -moz-osx-font-smoothing: grayscale;
   background-color: #f7f9fb;
   color: #0b1220;
+  overflow-x: hidden;
 }
 
 /* Card */

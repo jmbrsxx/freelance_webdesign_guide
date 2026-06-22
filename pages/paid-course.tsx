@@ -26,13 +26,13 @@ export default function PaidCoursePage() {
     };
 
     return (
-      <div className="min-h-screen bg-gradient-to-br from-green-50 to-blue-50 flex items-center justify-center p-4">
-        <div className="bg-white rounded-lg shadow-lg p-8 max-w-2xl w-full">
+      <div className="min-h-screen bg-gradient-to-br from-green-50 to-blue-50 flex items-center justify-center p-4 md:p-8">
+        <div className="bg-white rounded-lg shadow-lg p-6 md:p-8 max-w-2xl w-full">
           <div className="text-center mb-8">
-            <div className="text-6xl mb-4 text-green-600">
+            <div className="text-5xl md:text-6xl mb-4 text-green-600">
               <MaterialIcon name="celebration" />
             </div>
-            <h1 className="text-4xl font-bold text-green-600 mb-2">
+            <h1 className="text-3xl md:text-4xl font-bold text-green-600 mb-2">
               Welcome to the Course!
             </h1>
             <p className="text-gray-600">
@@ -118,7 +118,7 @@ export default function PaidCoursePage() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-slate-50 to-white">
+    <div className="min-h-screen bg-gradient-to-b from-slate-50 to-white overflow-x-hidden">
         {/* Navigation */}
         <nav className="border-b border-slate-200 bg-white sticky top-0 z-50">
           <div className="max-w-4xl mx-auto px-6 py-4">
@@ -130,7 +130,7 @@ export default function PaidCoursePage() {
         </nav>
 
         {/* Main Content */}
-        <div className="max-w-4xl mx-auto px-6 py-16">
+        <div className="max-w-4xl mx-auto px-4 py-12 md:px-6 md:py-16">
         
         {/* Payment CTA Section */}
         <div className="mb-16 bg-gradient-to-br from-blue-50 to-indigo-50 rounded-lg shadow-lg p-8 text-center">
@@ -140,7 +140,7 @@ export default function PaidCoursePage() {
             </div>
           </div>
           
-          <h2 className="text-3xl font-bold text-slate-900 mb-2">
+          <h2 className="text-2xl md:text-3xl font-bold text-slate-900 mb-2">
             Get Full Course Access
           </h2>
           <p className="text-slate-600 mb-4">
@@ -170,7 +170,7 @@ export default function PaidCoursePage() {
 
         {/* Header */}
         <div className="mb-16">
-          <h1 className="text-5xl md:text-6xl font-bold mb-6 leading-tight text-slate-900">
+          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight text-slate-900">
             The Complete Freelance Web Design & Development Course
           </h1>
           <p className="text-xl text-slate-600 leading-relaxed">
@@ -179,11 +179,11 @@ export default function PaidCoursePage() {
         </div>
 
         {/* Course Overview */}
-        <div className="mb-16 bg-white border-2 border-blue-200 rounded-lg p-12">
+        <div className="mb-16 bg-white border-2 border-blue-200 rounded-lg p-6 md:p-10 lg:p-12">
           <div className="flex items-start gap-4 mb-6">
             <MaterialIcon name="library_books" />
             <div>
-              <h2 className="text-3xl font-bold text-slate-900 mb-3">Full Course Access</h2>
+               <h2 className="text-2xl md:text-3xl font-bold text-slate-900 mb-3">Full Course Access</h2>
               <p className="text-lg text-slate-600 leading-relaxed">
                 Get everything from Module 1 through Module 8 — all 96 pages, 47 lessons, and every practical framework you need to build a profitable freelance web design business.
               </p>
@@ -191,7 +191,7 @@ export default function PaidCoursePage() {
           </div>
 
           <div className="flex items-baseline gap-2 mb-4">
-            <span className="text-5xl font-bold text-blue-600">$27</span>
+            <span className="text-4xl md:text-5xl font-bold text-blue-600">$27</span>
             <span className="text-slate-600">one-time payment</span>
           </div>
 
@@ -202,7 +202,7 @@ export default function PaidCoursePage() {
 
         {/* All 8 Modules */}
         <div className="mb-16">
-          <h2 className="text-3xl font-bold text-slate-900 mb-8 flex items-center gap-3">
+          <h2 className="text-2xl md:text-3xl font-bold text-slate-900 mb-8 flex items-center gap-3">
             <MaterialIcon name="menu_book" />
             All 8 Modules
           </h2>
@@ -277,7 +277,7 @@ export default function PaidCoursePage() {
 
         {/* Practical Frameworks */}
         <div className="mb-16">
-          <h2 className="text-3xl font-bold text-slate-900 mb-8 flex items-center gap-3">
+          <h2 className="text-2xl md:text-3xl font-bold text-slate-900 mb-8 flex items-center gap-3">
             <MaterialIcon name="checklist" />
             Practical Frameworks Included
           </h2>
@@ -301,8 +301,8 @@ export default function PaidCoursePage() {
         </div>
 
         {/* Why This Works */}
-        <div className="mb-16 bg-slate-100 border border-slate-300 rounded-lg p-12">
-          <h2 className="text-2xl font-bold text-slate-900 mb-6 flex items-center gap-3">
+        <div className="mb-16 bg-slate-100 border border-slate-300 rounded-lg p-6 md:p-10 lg:p-12">
+          <h2 className="text-2xl md:text-3xl font-bold text-slate-900 mb-6 flex items-center gap-3">
             <MaterialIcon name="verified" />
             Why This Works
           </h2>
@@ -313,11 +313,11 @@ export default function PaidCoursePage() {
 
         {/* Perfect For */}
         <div className="mb-16">
-          <h2 className="text-3xl font-bold text-slate-900 mb-8 flex items-center gap-3">
+          <h2 className="text-2xl md:text-3xl font-bold text-slate-900 mb-8 flex items-center gap-3">
             <MaterialIcon name="target_audience" />
             Perfect For
           </h2>
-          <div className="grid md:grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             {[
               "Freelancers learning the business side (0-2 years in)",
               "Designers/developers tired of undercharging",
@@ -335,8 +335,8 @@ export default function PaidCoursePage() {
         </div>
 
         {/* What You Get */}
-        <div className="mb-16 bg-blue-50 border border-blue-200 rounded-lg p-12">
-          <h2 className="text-2xl font-bold text-slate-900 mb-6 flex items-center gap-3">
+        <div className="mb-16 bg-blue-50 border border-blue-200 rounded-lg p-6 md:p-10 lg:p-12">
+          <h2 className="text-2xl md:text-3xl font-bold text-slate-900 mb-6 flex items-center gap-3">
             <MaterialIcon name="card_giftcard" />
             What You Get
           </h2>

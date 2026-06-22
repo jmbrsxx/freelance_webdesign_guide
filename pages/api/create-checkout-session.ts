@@ -6,10 +6,16 @@ const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
 });
 
 // Stripe Price IDs for different currencies
-// Create these via scripts/setup-stripe-price.ts and set in .env.local
+// Create these via scripts/setup-stripe-prices.ts and set in .env.local
 const COURSE_PRICE_IDS: { [key: string]: string } = {
   usd: process.env.STRIPE_COURSE_PRICE_ID_USD!,
+  gbp: process.env.STRIPE_COURSE_PRICE_ID_GBP!,
+  cad: process.env.STRIPE_COURSE_PRICE_ID_CAD!,
+  aud: process.env.STRIPE_COURSE_PRICE_ID_AUD!,
+  eur: process.env.STRIPE_COURSE_PRICE_ID_EUR!,
   brl: process.env.STRIPE_COURSE_PRICE_ID_BRL!,
+  inr: process.env.STRIPE_COURSE_PRICE_ID_INR!,
+  aed: process.env.STRIPE_COURSE_PRICE_ID_AED!,
 };
 
 type ResponseData = {

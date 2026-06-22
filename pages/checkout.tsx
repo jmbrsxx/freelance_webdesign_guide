@@ -22,7 +22,10 @@ export default function CheckoutPage() {
   const [emailError, setEmailError] = useState('');
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  const [currency, setCurrency] = useState<'usd' | 'brl'>('usd');
+  const [currency, setCurrency] = useState<string>('usd');
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+
+  const currencies = ['USD', 'GBP', 'CAD', 'AUD', 'EUR', 'BRL', 'INR', 'AED'];
 
   useEffect(() => {
     // Check for session_id in URL after component mounts
@@ -189,29 +192,39 @@ export default function CheckoutPage() {
             <label className="block text-sm font-medium text-slate-700 mb-3">
               Select Currency
             </label>
-            <div className="flex gap-3">
+            <div className="relative">
               <button
                 type="button"
-                onClick={() => setCurrency('usd')}
-                className={`flex-1 py-2 px-4 rounded-lg font-semibold transition-colors ${
-                  currency === 'usd'
-                    ? 'bg-blue-600 text-white'
-                    : 'bg-slate-100 text-slate-700 hover:bg-slate-200'
-                }`}
+                onClick={() => setIsDropdownOpen(!isDropdownOpen)}
+                className="w-full px-4 py-2 bg-white border border-slate-300 rounded-lg text-left font-medium text-slate-900 flex justify-between items-center hover:bg-slate-50 transition"
               >
-                USD ($27.00)
+                <span>{currency.toUpperCase()}</span>
+                <MaterialIcon name={isDropdownOpen ? 'expand_less' : 'expand_more'} />
               </button>
-              <button
-                type="button"
-                onClick={() => setCurrency('brl')}
-                className={`flex-1 py-2 px-4 rounded-lg font-semibold transition-colors ${
-                  currency === 'brl'
-                    ? 'bg-blue-600 text-white'
-                    : 'bg-slate-100 text-slate-700 hover:bg-slate-200'
-                }`}
-              >
-                BRL (R$135.00)
-              </button>
+
+              {isDropdownOpen && (
+                <div className="absolute top-full left-0 right-0 mt-1 bg-white border border-slate-300 rounded-lg shadow-lg z-10">
+                  <div className="max-h-60 overflow-y-auto">
+                    {currencies.map((currencyCode) => (
+                      <button
+                        key={currencyCode}
+                        type="button"
+                        onClick={() => {
+                          setCurrency(currencyCode.toLowerCase());
+                          setIsDropdownOpen(false);
+                        }}
+                        className={`w-full text-left px-4 py-3 font-medium transition-colors ${
+                          currency === currencyCode.toLowerCase()
+                            ? 'bg-blue-600 text-white'
+                            : 'text-slate-900 hover:bg-slate-100'
+                        }`}
+                      >
+                        {currencyCode}
+                      </button>
+                    ))}
+                  </div>
+                </div>
+              )}
             </div>
           </div>
 
@@ -279,7 +292,7 @@ export default function CheckoutPage() {
               disabled={loading}
               className="w-full bg-blue-600 text-white font-bold py-3 px-6 rounded-lg hover:bg-blue-700 disabled:bg-gray-400 disabled:cursor-not-allowed transition"
             >
-              {loading ? 'Redirecting to Stripe...' : `Proceed to Payment (${currency === 'brl' ? 'R$135.00' : '$27.00'})`}
+              {loading ? 'Redirecting to Stripe...' : `Proceed to Payment (${currency.toUpperCase()})`}
             </button>
           )}
 
@@ -294,14 +307,6 @@ export default function CheckoutPage() {
               Enter a valid email to continue
             </div>
           )}
-
-          <p className="text-xs text-slate-500 mt-6 text-center">
-            <span className="flex items-center justify-center gap-1 mb-2">
-              <MaterialIcon name="lock" />
-              Secure payment via Stripe
-            </span>
-            Test mode: Use card <code className="bg-slate-100 px-2 py-1 rounded">4242 4242 4242 4242</code>, any future expiry, and any 3-digit CVC.
-          </p>
         </div>
       </div>
   );
