@@ -147,16 +147,16 @@ export default function PaidCoursePage() {
             96 pages • 47 lessons • Complete freelance business blueprint
           </p>
           
-          <div className="bg-white rounded-lg p-6 mb-6 inline-block">
-            <p className="text-slate-600 text-sm mb-1">Price</p>
-            <p className="text-4xl font-bold text-slate-900">$27</p>
-            <p className="text-slate-500 text-xs mt-2">One-time payment • Lifetime access</p>
-          </div>
+           <div className="bg-white rounded-lg p-6 mb-6 w-fit mx-auto">
+             <p className="text-slate-600 text-sm mb-1">Price</p>
+             <p className="text-4xl font-bold text-slate-900">$27</p>
+             <p className="text-slate-500 text-xs mt-2">One-time payment • Lifetime access</p>
+           </div>
 
-          <Link
-            href="/checkout"
-            className="inline-block bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-8 rounded-lg transition transform hover:scale-105"
-          >
+           <Link
+             href="/checkout"
+             className="w-fit mx-auto block bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-8 rounded-lg transition transform hover:scale-105"
+           >
             <span className="flex items-center gap-2">
               <MaterialIcon name="lock" />
               Proceed to Checkout
