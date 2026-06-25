@@ -2,14 +2,7 @@
 
 import React, { useState } from 'react';
 import Link from 'next/link';
-
-const MaterialIcon = ({ name }: { name: string }) => (
-  <span className="material-icons align-middle">{name}</span>
-)
-
-const MaterialIconOutlined = ({ name }: { name: string }) => (
-  <span className="material-icons-outlined align-middle">{name}</span>
-)
+import MaterialIcon from '../components/MaterialIcon';
 
 export default function PaidCoursePage() {
   const [paymentSuccess, setPaymentSuccess] = useState(false);
@@ -293,7 +286,7 @@ export default function PaidCoursePage() {
               "Client management templates & systems"
             ].map((item, idx) => (
               <div key={idx} className="flex items-start gap-3 bg-white border border-slate-200 p-4 rounded-lg">
-                <MaterialIconOutlined name="check_circle" />
+                <MaterialIcon name="check_circle" outlined />
                 <span className="text-slate-700">{item}</span>
               </div>
             ))}
@@ -327,7 +320,7 @@ export default function PaidCoursePage() {
               "Anyone serious about building a sustainable business"
             ].map((item, idx) => (
               <div key={idx} className="flex items-start gap-3">
-                <MaterialIconOutlined name="done" />
+                <MaterialIcon name="done" outlined />
                 <span className="text-slate-700">{item}</span>
               </div>
             ))}

@@ -1,8 +1,5 @@
 import React from 'react'
-
-const MaterialIcon = ({ name }: { name: string }) => (
-  <span className="material-icons align-middle">{name}</span>
-)
+import MaterialIcon from './MaterialIcon'
 
 export default function ModulesOverview() {
   const modules = [

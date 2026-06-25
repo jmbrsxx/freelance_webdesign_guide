@@ -1,9 +1,6 @@
 import React from 'react'
 import Link from 'next/link'
-
-const MaterialIcon = ({ name }: { name: string }) => (
-  <span className="material-icons text-2xl align-middle">{name}</span>
-)
+import MaterialIcon from '../components/MaterialIcon'
 
 export default function Home() {
   return (
@@ -26,7 +23,7 @@ export default function Home() {
           <div className="text-center mb-16">
             <div className="flex justify-center mb-6">
               <div className="p-3 bg-blue-100 rounded-full">
-                <MaterialIcon name="school" />
+                <MaterialIcon name="school" className="text-2xl align-middle" />
               </div>
             </div>
             <h1 className="text-5xl md:text-6xl font-bold text-slate-900 mb-6 leading-tight">
@@ -84,7 +81,7 @@ export default function Home() {
               <div key={idx} className="bg-white border border-slate-200 rounded-lg p-8 hover:border-blue-300 hover:shadow-md transition">
                 <div className="flex items-start gap-4">
                   <div className="p-3 bg-blue-50 rounded-lg flex-shrink-0">
-                    <span className="material-icons text-blue-600">{item.icon}</span>
+                    <MaterialIcon name={item.icon} className="text-blue-600" />
                   </div>
                   <div>
                     <h3 className="text-lg font-semibold text-slate-900 mb-2">{item.title}</h3>
@@ -113,7 +110,7 @@ export default function Home() {
             ].map((item, idx) => (
               <div key={idx} className="flex items-center gap-4 bg-white border border-slate-200 rounded-lg p-4 hover:border-green-300 transition">
                 <div className="text-green-600 flex-shrink-0">
-                  <span className="material-icons">check_circle</span>
+                  <MaterialIcon name="check_circle" />
                 </div>
                 <span className="text-slate-700">{item}</span>
               </div>
@@ -135,7 +132,7 @@ export default function Home() {
               "Those seeking to build systems that work without them",
             ].map((item, idx) => (
               <div key={idx} className="flex items-start gap-3">
-                <span className="material-icons-outlined text-blue-600 flex-shrink-0 mt-1">circle</span>
+                <MaterialIcon name="circle" outlined className="text-blue-600 flex-shrink-0 mt-1" />
                 <span className="text-slate-700">{item}</span>
               </div>
             ))}
@@ -145,7 +142,7 @@ export default function Home() {
         {/* Why This Works */}
         <section className="mb-20 border-2 border-blue-200 bg-blue-50 rounded-lg p-12">
           <h2 className="text-2xl font-bold text-slate-900 mb-6 flex items-center gap-3">
-            <span className="material-icons text-blue-600">verified</span>
+            <MaterialIcon name="verified" className="text-blue-600" />
             Why This Works
           </h2>
           <p className="text-lg text-slate-700 leading-relaxed">
@@ -157,7 +154,7 @@ export default function Home() {
         <section className="mb-20 grid md:grid-cols-2 gap-8">
           <div className="bg-white border border-slate-200 rounded-lg p-8">
             <h3 className="text-lg font-bold text-slate-900 mb-4 flex items-center gap-2">
-              <span className="material-icons text-blue-600">info</span>
+              <MaterialIcon name="info" className="text-blue-600" />
               Free Modules (1-3)
             </h3>
             <ul className="space-y-2 text-slate-600">
@@ -174,7 +171,7 @@ export default function Home() {
           
           <div className="bg-white border-2 border-blue-500 rounded-lg p-8">
             <h3 className="text-lg font-bold text-slate-900 mb-4 flex items-center gap-2">
-              <span className="material-icons text-blue-600">star</span>
+              <MaterialIcon name="star" className="text-blue-600" />
               Full Course (All 8)
             </h3>
             <p className="text-3xl font-bold text-blue-600 mb-2">$27</p>

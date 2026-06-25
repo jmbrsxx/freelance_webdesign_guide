@@ -1,9 +1,6 @@
 import React, { useState } from 'react'
 import Link from 'next/link'
-
-const MaterialIcon = ({ name }: { name: string }) => (
-  <span className="material-icons text-2xl align-middle">{name}</span>
-)
+import MaterialIcon from '../components/MaterialIcon'
 
 export default function Contact() {
   const [formData, setFormData] = useState({ email: '', message: '' });
@@ -141,7 +138,7 @@ export default function Contact() {
                     </>
                   ) : (
                     <>
-                      <span className="material-icons text-xl">send</span>
+                      <MaterialIcon name="send" className="text-xl" />
                       Send Message
                     </>
                   )}
@@ -158,23 +155,23 @@ export default function Contact() {
             <h2 className="text-2xl font-bold text-slate-900 mb-6">Common Reasons to Contact Us</h2>
             <ul className="space-y-3">
               <li className="flex items-start gap-3">
-                <span className="material-icons text-blue-600 flex-shrink-0 mt-1">check</span>
+                <MaterialIcon name="check" className="text-blue-600 flex-shrink-0 mt-1" />
                 <span className="text-slate-700">I didn't receive my download link</span>
               </li>
               <li className="flex items-start gap-3">
-                <span className="material-icons text-blue-600 flex-shrink-0 mt-1">check</span>
+                <MaterialIcon name="check" className="text-blue-600 flex-shrink-0 mt-1" />
                 <span className="text-slate-700">I'm having trouble opening or downloading the PDF</span>
               </li>
               <li className="flex items-start gap-3">
-                <span className="material-icons text-blue-600 flex-shrink-0 mt-1">check</span>
+                <MaterialIcon name="check" className="text-blue-600 flex-shrink-0 mt-1" />
                 <span className="text-slate-700">I have a question about the course content before purchasing</span>
               </li>
               <li className="flex items-start gap-3">
-                <span className="material-icons text-blue-600 flex-shrink-0 mt-1">check</span>
+                <MaterialIcon name="check" className="text-blue-600 flex-shrink-0 mt-1" />
                 <span className="text-slate-700">I have a billing or payment question</span>
               </li>
               <li className="flex items-start gap-3">
-                <span className="material-icons text-blue-600 flex-shrink-0 mt-1">check</span>
+                <MaterialIcon name="check" className="text-blue-600 flex-shrink-0 mt-1" />
                 <span className="text-slate-700">General feedback or suggestions</span>
               </li>
             </ul>

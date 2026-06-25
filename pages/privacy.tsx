@@ -1,10 +1,6 @@
 import React from 'react'
 import Link from 'next/link'
 
-const MaterialIcon = ({ name }: { name: string }) => (
-  <span className="material-icons text-2xl align-middle">{name}</span>
-)
-
 export default function Privacy() {
   return (
     <div className="min-h-screen bg-gradient-to-b from-slate-50 to-white">

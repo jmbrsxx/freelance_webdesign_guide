@@ -1,10 +1,7 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
-
-const MaterialIcon = ({ name }: { name: string }) => (
-  <span className="material-icons align-middle">{name}</span>
-)
+import MaterialIcon from '../components/MaterialIcon';
 
 export default function CheckoutPage() {
   // Detect session_id from URL on initial load
