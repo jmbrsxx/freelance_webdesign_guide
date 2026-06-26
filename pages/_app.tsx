@@ -2,6 +2,7 @@ import type { AppProps } from 'next/app'
 import Head from 'next/head'
 import '../styles/globals.css'
 import { Inter } from 'next/font/google'
+import { Analytics } from '@vercel/analytics/next'
 
 const inter = Inter({ subsets: ['latin'], display: 'swap' })
 
@@ -71,6 +72,7 @@ export default function App({ Component, pageProps }: AppProps) {
       <main className={`${inter.className} overflow-x-hidden`}>
         <Component {...pageProps} />
       </main>
+      <Analytics />
     </>
   )
 }
