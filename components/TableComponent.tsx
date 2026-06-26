@@ -8,13 +8,13 @@ interface TableProps {
 export default function TableComponent({ headers, rows }: TableProps) {
   return (
     <div className="overflow-x-auto my-6">
-      <table className="w-full border-collapse">
+      <table className="w-full border-collapse border-2 border-black">
         <thead>
-          <tr className="bg-slate-900 text-white">
+          <tr className="bg-black text-white">
             {headers.map((header, idx) => (
               <th
                 key={idx}
-                className="px-4 py-3 text-left font-bold text-sm border-b-2 border-slate-700"
+                className="px-4 py-3 text-left font-black uppercase text-sm border-b-2 border-red-700"
               >
                 {header}
               </th>
@@ -25,14 +25,14 @@ export default function TableComponent({ headers, rows }: TableProps) {
           {rows.map((row, rowIdx) => (
             <tr
               key={rowIdx}
-              className={`border-b border-slate-200 ${
-                rowIdx % 2 === 0 ? 'bg-white' : 'bg-slate-50'
+              className={`border-b border-black ${
+                rowIdx % 2 === 0 ? 'bg-white' : 'bg-[#f6f2ec]'
               }`}
             >
               {row.map((cell, cellIdx) => (
                 <td
                   key={cellIdx}
-                  className="px-4 py-3 text-sm text-slate-700"
+                  className="px-4 py-3 text-sm text-zinc-700"
                 >
                   {cell}
                 </td>

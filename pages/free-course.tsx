@@ -3,6 +3,7 @@ import React from 'react'
 import LessonHeader from '../components/LessonHeader'
 import TableComponent from '../components/TableComponent'
 import ActionTask from '../components/ActionTask'
+import { BrandNav } from '../components/BrandShell'
 
 const freeCourseText = `THE COMPLETE COURSE GUIDE
 FREELANCE WEB
@@ -699,27 +700,27 @@ function LessonCard({ lesson, moduleNum }: { lesson: Lesson; moduleNum: string }
       const rules: { pattern: RegExp; render: (value: string, index: number) => React.ReactNode }[] = [
         {
           pattern: /\b((?:Week|Month|Months)\s+\d+(?:[â€“–-]\d+|\+)?):/g,
-          render: (value, index) => <strong key={`time-inline-${index}`} className="font-bold text-slate-900">{value}</strong>,
+          render: (value, index) => <strong key={`time-inline-${index}`} className="font-bold text-black">{value}</strong>,
         },
         {
           pattern: /(Income range:|Income Range:|Best for:|Ceiling:)/g,
-          render: (value, index) => <strong key={`label-${index}`} className="font-bold text-slate-900">{value}</strong>,
+          render: (value, index) => <strong key={`label-${index}`} className="font-bold text-black">{value}</strong>,
         },
         {
           pattern: /(HIGH VALUE)/g,
-          render: (value, index) => <strong key={`green-${index}`} className="font-bold text-green-600">{value}</strong>,
+          render: (value, index) => <strong key={`green-${index}`} className="font-bold text-red-700">{value}</strong>,
         },
         {
           pattern: /(MEDIUM VALUE)/g,
-          render: (value, index) => <strong key={`yellow-${index}`} className="font-bold text-amber-500">{value}</strong>,
+          render: (value, index) => <strong key={`yellow-${index}`} className="font-bold text-red-700">{value}</strong>,
         },
         {
           pattern: /(\(\d+(?:[â€“–-]\d+)?\s+(?:sentences|minutes|hours)\)|\(\d+\s+quote\)|Cost:.*$)/gi,
-          render: (value, index) => <span key={`muted-${index}`} className="text-slate-500">{value}</span>,
+          render: (value, index) => <span key={`muted-${index}`} className="text-zinc-500">{value}</span>,
         },
         {
           pattern: /(Writing & Strategy|Code Completion|Research & Content|Image Generation|Landing Page Generation)/g,
-          render: (value, index) => <span key={`blue-${index}`} className="font-semibold text-blue-700">{value}</span>,
+          render: (value, index) => <span key={`blue-${index}`} className="font-semibold text-red-700">{value}</span>,
         },
       ]
 
@@ -828,21 +829,21 @@ function LessonCard({ lesson, moduleNum }: { lesson: Lesson; moduleNum: string }
       const prefix = patternPrefix || boldPrefixes.find((item) => text.startsWith(item))
       if (prefix) {
         return [
-          <strong key="prefix" className="font-bold text-slate-900">{prefix}</strong>,
+          <strong key="prefix" className="font-bold text-black">{prefix}</strong>,
           ...formatWithRules(text.slice(prefix.length)),
         ]
       }
 
       const numberedChecklistMatch = text.match(/^(\d+\.\s+.+)$/)
       if (numberedChecklistMatch) {
-        return [<strong key="numbered" className="font-bold text-slate-900">{text}</strong>]
+        return [<strong key="numbered" className="font-bold text-black">{text}</strong>]
       }
 
       const stepMatch = text.match(/^(Step \d+:\s+[^(]+)(\([^)]+\))(.*)$/)
       if (stepMatch) {
         return [
-          <strong key="step" className="font-bold text-slate-900">{stepMatch[1]}</strong>,
-          <span key="step-time" className="text-slate-500">{stepMatch[2]}</span>,
+          <strong key="step" className="font-bold text-black">{stepMatch[1]}</strong>,
+          <span key="step-time" className="text-zinc-500">{stepMatch[2]}</span>,
           ...formatWithRules(stepMatch[3]),
         ]
       }
@@ -851,11 +852,11 @@ function LessonCard({ lesson, moduleNum }: { lesson: Lesson; moduleNum: string }
       if (nicheDimensionMatch) {
         return [
           nicheDimensionMatch[1],
-          <strong key="who" className="font-bold text-slate-900">{nicheDimensionMatch[2]}</strong>,
+          <strong key="who" className="font-bold text-black">{nicheDimensionMatch[2]}</strong>,
           nicheDimensionMatch[3],
-          <strong key="what" className="font-bold text-slate-900">{nicheDimensionMatch[4]}</strong>,
+          <strong key="what" className="font-bold text-black">{nicheDimensionMatch[4]}</strong>,
           nicheDimensionMatch[5],
-          <strong key="where" className="font-bold text-slate-900">{nicheDimensionMatch[6]}</strong>,
+          <strong key="where" className="font-bold text-black">{nicheDimensionMatch[6]}</strong>,
           nicheDimensionMatch[7],
         ]
       }
@@ -863,7 +864,7 @@ function LessonCard({ lesson, moduleNum }: { lesson: Lesson; moduleNum: string }
       const sectionMatch = text.match(/^(Section \d+:\s*[^â€“—-]+)(.*)$/)
       if (sectionMatch) {
         return [
-          <strong key="section" className="font-bold text-slate-900">{sectionMatch[1]}</strong>,
+          <strong key="section" className="font-bold text-black">{sectionMatch[1]}</strong>,
           ...formatWithRules(sectionMatch[2]),
         ]
       }
@@ -871,7 +872,7 @@ function LessonCard({ lesson, moduleNum }: { lesson: Lesson; moduleNum: string }
       const timePrefixMatch = text.match(/^((?:Week|Month|Months)\s+\d+(?:[â€“–-]\d+|\+)?):?(.*)$/)
       if (timePrefixMatch) {
         return [
-          <strong key="time" className="font-bold text-slate-900">{timePrefixMatch[1]}{text.includes(':') ? ':' : ''}</strong>,
+          <strong key="time" className="font-bold text-black">{timePrefixMatch[1]}{text.includes(':') ? ':' : ''}</strong>,
           ...formatWithRules(timePrefixMatch[2]),
         ]
       }
@@ -889,7 +890,7 @@ function LessonCard({ lesson, moduleNum }: { lesson: Lesson; moduleNum: string }
       ]
       if (industryMatch && highValueIndustries.includes(industryMatch[1])) {
         return [
-          <strong key="industry" className="font-bold text-slate-900">{industryMatch[1]}:</strong>,
+          <strong key="industry" className="font-bold text-black">{industryMatch[1]}:</strong>,
           ...formatWithRules(industryMatch[2]),
         ]
       }
@@ -900,7 +901,7 @@ function LessonCard({ lesson, moduleNum }: { lesson: Lesson; moduleNum: string }
     const flushCurrentSection = (key: string) => {
       if (currentSection.length > 0) {
         elements.push(
-          <p key={key} className="text-slate-700 whitespace-pre-line mb-5 leading-7">
+          <p key={key} className="text-zinc-700 whitespace-pre-line mb-5 leading-7">
             {currentSection.map((sectionLine, index) => (
               <React.Fragment key={index}>
                 {index > 0 && <br />}
@@ -1011,23 +1012,23 @@ function LessonCard({ lesson, moduleNum }: { lesson: Lesson; moduleNum: string }
         }
         
         // Determine the type of special section for styling
-        let bgColor = 'bg-blue-50'
-        let borderColor = 'border-l-4 border-blue-500'
+        let bgColor = 'bg-[#f6f2ec]'
+        let borderColor = 'border-l-4 border-red-700'
         if (line.includes('Common Mindset Trap') || line.includes('Niche Paralysis')) {
-          bgColor = 'bg-yellow-50'
-          borderColor = 'border-l-4 border-yellow-500'
+          bgColor = 'bg-[#f6f2ec]'
+          borderColor = 'border-l-4 border-red-700'
         } else if (line.includes('Images:') || line.includes('If You Have No Numbers')) {
-          bgColor = 'bg-orange-50'
-          borderColor = 'border-l-4 border-orange-500'
+          bgColor = 'bg-[#f6f2ec]'
+          borderColor = 'border-l-4 border-red-700'
         } else if (line.includes('Module 1 Complete') || line.includes('Module 3 Complete')) {
-          bgColor = 'bg-green-50'
-          borderColor = 'border-l-4 border-green-500'
+          bgColor = 'bg-black text-white'
+          borderColor = 'border-l-4 border-red-700'
         }
         
         elements.push(
-          <div key={`special-${i}`} className={`mb-6 p-4 ${bgColor} ${borderColor}`}>
-            <p className="font-semibold mb-2">{line}</p>
-            <p className="text-slate-700 whitespace-pre-line">{specialSectionContent.join('\n')}</p>
+          <div key={`special-${i}`} className={`mb-6 border-2 border-black p-4 ${bgColor} ${borderColor}`}>
+            <p className="font-black uppercase mb-2">{line}</p>
+            <p className="whitespace-pre-line text-inherit">{specialSectionContent.join('\n')}</p>
           </div>
         )
         
@@ -1092,7 +1093,7 @@ function LessonCard({ lesson, moduleNum }: { lesson: Lesson; moduleNum: string }
       if (isTitleHeader(line)) {
         flushCurrentSection(`p-${i}`)
         elements.push(
-          <h3 key={`title-${i}`} className="mt-8 mb-4 text-2xl font-bold leading-snug text-blue-900">
+          <h3 key={`title-${i}`} className="mt-8 mb-4 text-2xl font-black uppercase leading-snug text-black">
             {line}
           </h3>
         )
@@ -1103,7 +1104,7 @@ function LessonCard({ lesson, moduleNum }: { lesson: Lesson; moduleNum: string }
       if (isSubtitleHeader(line)) {
         flushCurrentSection(`p-${i}`)
         elements.push(
-          <h4 key={`subtitle-${i}`} className="mt-7 mb-3 text-xl font-bold leading-snug text-blue-800">
+          <h4 key={`subtitle-${i}`} className="mt-7 mb-3 text-xl font-black leading-snug text-red-700">
             {line}
           </h4>
         )
@@ -1135,7 +1136,7 @@ function LessonCard({ lesson, moduleNum }: { lesson: Lesson; moduleNum: string }
          title={lesson.title}
          subtitle={subtitle}
        />
-       <div className="bg-white rounded-b-lg p-8 shadow-md border border-t-0 border-slate-300">
+       <div className="bg-white p-8 border-2 border-t-0 border-black shadow-[8px_8px_0_#b91c1c]">
          {renderContent()}
        </div>
      </article>
@@ -1144,23 +1145,23 @@ function LessonCard({ lesson, moduleNum }: { lesson: Lesson; moduleNum: string }
 
 function ModuleIntro({ module, moduleNum }: { module: ModuleData; moduleNum: string }) {
   return (
-    <article className="mb-8 overflow-hidden rounded-lg bg-white shadow-md border border-slate-300">
-      <header className="bg-slate-900 px-8 py-10 text-white">
-        <p className="text-xs font-bold uppercase tracking-[0.22em] text-green-400">FREE MODULE</p>
-        <h2 className="mt-3 text-5xl font-bold leading-none text-white">MODULE {moduleNum}</h2>
-        <p className="mt-5 text-3xl font-bold leading-tight text-amber-400">{module.title}</p>
-        <p className="mt-4 text-sm italic text-slate-300">"{module.quote}"</p>
+    <article className="mb-8 overflow-hidden bg-white border-2 border-black shadow-[10px_10px_0_#b91c1c]">
+      <header className="bg-black px-8 py-10 text-white">
+        <p className="text-xs font-black uppercase tracking-[0.22em] text-red-500">FREE MODULE</p>
+        <h2 className="mt-3 text-5xl font-black uppercase leading-none text-white">MODULE {moduleNum}</h2>
+        <p className="mt-5 text-3xl font-black leading-tight text-red-500">{module.title}</p>
+        <p className="mt-4 text-sm italic text-zinc-300">"{module.quote}"</p>
         <div className="mt-5">
-          <p className="text-xs font-bold uppercase tracking-wide text-amber-400">MILESTONE</p>
+          <p className="text-xs font-black uppercase tracking-wide text-red-500">MILESTONE</p>
           <p className="mt-1 text-sm text-white">{module.milestone}</p>
         </div>
       </header>
 
       <div className="px-8 py-7">
-        <h3 className="text-lg font-bold text-slate-900">Lessons in this module</h3>
+        <h3 className="text-lg font-black uppercase text-black">Lessons in this module</h3>
         <div className="mt-4 space-y-2">
           {module.lessons.map((lesson) => (
-            <p key={lesson.id} className="text-sm font-bold text-slate-900">
+            <p key={lesson.id} className="text-sm font-bold text-zinc-800">
               {lesson.id} {lesson.title}
             </p>
           ))}
@@ -1186,35 +1187,36 @@ function ModulePanel({ module, moduleNum }: { module: ModuleData; moduleNum: str
 
 export default function FreeCoursePage() {
   return (
-    <div className="bg-slate-50 text-slate-950">
-      <section className="bg-slate-900 text-white py-20">
+    <div className="bg-[#f6f2ec] text-black">
+      <BrandNav />
+      <section className="border-b-2 border-black bg-black text-white py-20">
         <div className="max-w-6xl mx-auto px-6">
           <div className="grid gap-10 lg:grid-cols-[1.2fr_0.8fr] lg:items-start">
             <div>
-              <p className="text-sm uppercase tracking-[0.28em] font-bold text-green-400">Free Course</p>
-              <h1 className="mt-5 text-5xl font-bold leading-tight md:text-6xl text-white">Freelance Web Design & Development</h1>
-              <p className="mt-6 max-w-3xl text-lg leading-8 text-slate-300">Master the complete freelance system with 3 comprehensive free modules covering mindset, tools, and portfolio strategy.</p>
+              <p className="text-sm uppercase tracking-[0.28em] font-black text-red-500">Free Course</p>
+              <h1 className="mt-5 text-5xl font-black uppercase leading-tight md:text-6xl text-white">Freelance Web Design & Development</h1>
+              <p className="mt-6 max-w-3xl text-lg leading-8 text-zinc-300">Master the complete freelance system with 3 comprehensive free modules covering mindset, tools, and portfolio strategy.</p>
               <div className="mt-10 flex flex-col gap-4 sm:flex-row sm:items-center">
-                <Link href="/paid-course" className="inline-flex items-center justify-center rounded-lg bg-blue-500 px-6 py-3 text-sm font-bold text-white transition hover:bg-blue-600">Get Access to the Full Course</Link>
-                <span className="inline-flex items-center gap-2 text-sm text-slate-300">
-                  <span className="inline-block bg-green-500 text-white text-xs font-bold px-3 py-1 rounded">[FREE]</span>
+                <Link href="/paid-course" className="inline-flex items-center justify-center bg-red-700 px-6 py-3 text-sm font-black uppercase text-white transition hover:bg-white hover:text-black">Get Access to the Full Course</Link>
+                <span className="inline-flex items-center gap-2 text-sm text-zinc-300">
+                  <span className="inline-block bg-red-700 text-white text-xs font-black px-3 py-1">[FREE]</span>
                   Modules 1, 2, 3
                 </span>
               </div>
             </div>
-            <div className="rounded-lg border border-slate-700 bg-slate-800 p-8">
-              <p className="text-sm uppercase tracking-[0.28em] font-bold text-blue-400 mb-4">What's Inside</p>
-              <ul className="space-y-3 text-slate-300">
+            <div className="border-2 border-red-700 bg-zinc-950 p-8 shadow-[10px_10px_0_#b91c1c]">
+              <p className="text-sm uppercase tracking-[0.28em] font-black text-red-500 mb-4">What's Inside</p>
+              <ul className="space-y-3 text-zinc-300">
                 <li className="flex items-start gap-2">
-                  <span className="text-green-400 font-bold mt-1">✓</span>
+                  <span className="text-red-500 font-bold mt-1">✓</span>
                   <span><strong>3 modules and 14 lessons</strong> covering mindset, tools, and portfolio strategy</span>
                 </li>
                 <li className="flex items-start gap-2">
-                  <span className="text-green-400 font-bold mt-1">✓</span>
+                  <span className="text-red-500 font-bold mt-1">✓</span>
                   <span><strong>About 35% of the full guide's content</strong> included in this free version</span>
                 </li>
                 <li className="flex items-start gap-2">
-                  <span className="text-green-400 font-bold mt-1">✓</span>
+                  <span className="text-red-500 font-bold mt-1">✓</span>
                   <span><strong>100% free</strong> — built to help you start earning your first $$</span>
                 </li>
               </ul>
@@ -1227,17 +1229,17 @@ export default function FreeCoursePage() {
         <ModulePanel module={modules[0]} moduleNum="1" />
         <ModulePanel module={modules[1]} moduleNum="2" />
         <ModulePanel module={modules[2]} moduleNum="3" />
-        <div className="mt-4 flex justify-center border-t border-slate-200 pt-12">
-          <Link href="/paid-course" className="inline-flex items-center justify-center rounded-lg bg-blue-600 px-7 py-3 text-sm font-bold text-white transition hover:bg-blue-700">
+        <div className="mt-4 flex justify-center border-t-2 border-black pt-12">
+          <Link href="/paid-course" className="inline-flex items-center justify-center bg-red-700 px-7 py-3 text-sm font-black uppercase text-white transition hover:bg-black">
             Get Access to the Full Course
           </Link>
         </div>
       </main>
 
-      <footer className="border-t border-slate-200 bg-slate-900 py-12 text-slate-400">
+      <footer className="border-t-2 border-black bg-black py-12 text-zinc-300">
         <div className="max-w-6xl mx-auto px-6">
           <p className="text-sm">© {new Date().getFullYear()} Freelance Web Design & Development Course — Free modules 1–3.</p>
-          <p className="text-xs mt-2 text-slate-500">Ready to scale? <Link href="/paid-course" className="text-blue-400 hover:text-blue-300">Explore modules 4–8</Link></p>
+          <p className="text-xs mt-2 text-zinc-500">Ready to scale? <Link href="/paid-course" className="text-red-400 hover:text-white">Explore modules 4–8</Link></p>
         </div>
       </footer>
     </div>

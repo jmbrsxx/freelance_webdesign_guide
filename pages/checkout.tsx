@@ -77,25 +77,25 @@ export default function CheckoutPage() {
 
   if (paymentSuccess) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-green-50 to-blue-50 flex items-center justify-center p-4">
-        <div className="bg-white rounded-lg shadow-lg p-8 max-w-2xl w-full">
+      <div className="min-h-screen bg-[#f6f2ec] bg-[linear-gradient(135deg,rgba(185,28,28,0.16)_0_12px,transparent_12px_24px)] flex items-center justify-center p-4">
+        <div className="bg-white border-2 border-black shadow-[10px_10px_0_#b91c1c] p-8 max-w-2xl w-full">
           <div className="text-center mb-8">
-            <div className="text-6xl mb-4 text-green-600">
+            <div className="text-6xl mb-4 text-red-700">
               <MaterialIcon name="celebration" />
             </div>
-            <h1 className="text-4xl font-bold text-green-600 mb-2">
+            <h1 className="text-4xl font-black uppercase text-black mb-2">
               Welcome to the Course!
             </h1>
-            <p className="text-gray-600">
+            <p className="text-zinc-600">
               Your payment has been processed successfully.
             </p>
           </div>
 
-          <div className="bg-blue-50 border-l-4 border-blue-500 p-4 mb-6">
-            <h3 className="font-bold text-blue-900 mb-2 flex items-center gap-2">
+          <div className="bg-black text-white border-l-4 border-red-700 p-4 mb-6">
+            <h3 className="font-black uppercase mb-2 flex items-center gap-2">
               <MaterialIcon name="done" /> What's Next?
             </h3>
-            <ul className="text-blue-800 space-y-1 text-sm">
+            <ul className="text-zinc-200 space-y-1 text-sm">
               <li className="flex items-center gap-2">
                 <MaterialIcon name="check_circle" />
                 Confirmation email sent to your inbox
@@ -114,7 +114,7 @@ export default function CheckoutPage() {
           <div className="space-y-3">
             <button
               onClick={handleDownload}
-              className="w-full bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 text-white font-bold py-3 px-6 rounded-lg flex items-center justify-center gap-2 transition transform hover:scale-105"
+              className="w-full bg-red-700 hover:bg-black text-white font-black uppercase py-3 px-6 flex items-center justify-center gap-2 transition"
             >
               <MaterialIcon name="download" />
               <span>Download Course Materials</span>
@@ -122,45 +122,45 @@ export default function CheckoutPage() {
 
             <a
               href="/"
-              className="w-full inline-block text-center bg-gray-200 hover:bg-gray-300 text-gray-800 font-bold py-3 px-6 rounded-lg transition"
+              className="w-full inline-block text-center border-2 border-black bg-[#f6f2ec] hover:bg-black hover:text-white text-black font-black uppercase py-3 px-6 transition"
             >
               Back to Home
             </a>
           </div>
 
-          <div className="mt-8 pt-8 border-t border-gray-200">
-            <h3 className="font-bold text-gray-900 mb-4 flex items-center gap-2">
+          <div className="mt-8 pt-8 border-t-2 border-black">
+            <h3 className="font-black uppercase text-black mb-4 flex items-center gap-2">
               <MaterialIcon name="library_books" />
               Course Modules
             </h3>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-              <div className="bg-purple-50 p-4 rounded">
+              <div className="border-2 border-black bg-[#f6f2ec] p-4">
                 <div className="text-2xl mb-2">
                   <MaterialIcon name="psychology" />
                 </div>
-                <h4 className="font-bold text-gray-800">Module 1</h4>
-                <p className="text-sm text-gray-600">Mindset & Market</p>
+                <h4 className="font-black text-black">Module 1</h4>
+                <p className="text-sm text-zinc-600">Mindset & Market</p>
               </div>
-              <div className="bg-blue-50 p-4 rounded">
+              <div className="border-2 border-black bg-[#f6f2ec] p-4">
                 <div className="text-2xl mb-2">
                   <MaterialIcon name="build" />
                 </div>
-                <h4 className="font-bold text-gray-800">Module 2</h4>
-                <p className="text-sm text-gray-600">Tech & Portfolio</p>
+                <h4 className="font-black text-black">Module 2</h4>
+                <p className="text-sm text-zinc-600">Tech & Portfolio</p>
               </div>
-              <div className="bg-green-50 p-4 rounded">
+              <div className="border-2 border-black bg-[#f6f2ec] p-4">
                 <div className="text-2xl mb-2">
                   <MaterialIcon name="trending_up" />
                 </div>
-                <h4 className="font-bold text-gray-800">Modules 3-8</h4>
-                <p className="text-sm text-gray-600">Advanced Topics</p>
+                <h4 className="font-black text-black">Modules 3-8</h4>
+                <p className="text-sm text-zinc-600">Advanced Topics</p>
               </div>
             </div>
           </div>
 
-          <div className="mt-8 p-4 bg-gray-50 rounded text-center">
-            <p className="text-sm text-gray-600">
-              Questions? <a href="/contact" className="text-blue-600 hover:text-blue-700 font-semibold">Email us here</a>
+          <div className="mt-8 p-4 bg-zinc-100 text-center">
+            <p className="text-sm text-zinc-600">
+              Questions? <a href="/contact" className="text-red-700 hover:text-black font-bold">Email us here</a>
             </p>
           </div>
         </div>
@@ -169,38 +169,38 @@ export default function CheckoutPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 to-slate-100 flex items-center justify-center p-4">
-      <div className="bg-white rounded-lg shadow-lg p-8 max-w-md w-full">
+    <div className="min-h-screen bg-[#f6f2ec] bg-[linear-gradient(135deg,rgba(185,28,28,0.14)_0_12px,transparent_12px_24px)] flex items-center justify-center p-4">
+      <div className="bg-white border-2 border-black shadow-[10px_10px_0_#b91c1c] p-8 max-w-md w-full">
           <div className="flex items-center gap-3 mb-6">
-            <div className="p-2 bg-blue-100 rounded">
+            <div className="p-2 bg-black text-red-600">
               <MaterialIcon name="shopping_cart" />
             </div>
             <div>
-              <h1 className="text-3xl font-bold text-slate-900">
+              <h1 className="text-3xl font-black uppercase text-black">
                 Checkout
               </h1>
-              <p className="text-slate-600 text-sm">
+              <p className="text-zinc-600 text-sm">
                 Complete your purchase
               </p>
             </div>
           </div>
 
           <div className="mb-6">
-            <label className="block text-sm font-medium text-slate-700 mb-3">
+            <label className="block text-sm font-black uppercase text-black mb-3">
               Select Currency
             </label>
             <div className="relative">
               <button
                 type="button"
                 onClick={() => setIsDropdownOpen(!isDropdownOpen)}
-                className="w-full px-4 py-2 bg-white border border-slate-300 rounded-lg text-left font-medium text-slate-900 flex justify-between items-center hover:bg-slate-50 transition"
+                className="w-full px-4 py-3 bg-[#f6f2ec] border-2 border-black text-left font-bold text-black flex justify-between items-center hover:bg-white transition"
               >
                 <span>{currency.toUpperCase()}</span>
                 <MaterialIcon name={isDropdownOpen ? 'expand_less' : 'expand_more'} />
               </button>
 
               {isDropdownOpen && (
-                <div className="absolute top-full left-0 right-0 mt-1 bg-white border border-slate-300 rounded-lg shadow-lg z-10">
+                <div className="absolute top-full left-0 right-0 mt-1 bg-white border-2 border-black shadow-[6px_6px_0_#0a0a0a] z-10">
                   <div className="max-h-60 overflow-y-auto">
                     {currencies.map((currencyCode) => (
                       <button
@@ -212,8 +212,8 @@ export default function CheckoutPage() {
                         }}
                         className={`w-full text-left px-4 py-3 font-medium transition-colors ${
                           currency === currencyCode.toLowerCase()
-                            ? 'bg-blue-600 text-white'
-                            : 'text-slate-900 hover:bg-slate-100'
+                            ? 'bg-red-700 text-white'
+                            : 'text-black hover:bg-zinc-100'
                         }`}
                       >
                         {currencyCode}
@@ -231,8 +231,8 @@ export default function CheckoutPage() {
               value={email}
               onChange={(e) => handleEmailChange(e.target.value)}
               placeholder="your@email.com"
-              className={`w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 ${
-                emailError ? 'border-red-500' : 'border-slate-300'
+              className={`w-full px-4 py-3 border-2 bg-[#f6f2ec] focus:outline-none focus:ring-2 focus:ring-red-700 ${
+                emailError ? 'border-red-700' : 'border-black'
               }`}
             />
             {emailError && (
@@ -241,7 +241,7 @@ export default function CheckoutPage() {
                 {emailError}
               </p>
             )}
-            <p className="text-xs text-slate-500 mt-1">
+            <p className="text-xs text-zinc-500 mt-1">
               We'll send your course access and confirmation to this email
             </p>
           </div>
@@ -287,20 +287,20 @@ export default function CheckoutPage() {
                 }
               }}
               disabled={loading}
-              className="w-full bg-blue-600 text-white font-bold py-3 px-6 rounded-lg hover:bg-blue-700 disabled:bg-gray-400 disabled:cursor-not-allowed transition"
+              className="w-full bg-red-700 text-white font-black uppercase py-3 px-6 hover:bg-black disabled:bg-zinc-500 disabled:cursor-not-allowed transition"
             >
               {loading ? 'Redirecting to Stripe...' : `Proceed to Payment (${currency.toUpperCase()})`}
             </button>
           )}
 
           {error && (
-            <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded mt-4">
+            <div className="bg-red-50 border-2 border-red-700 text-red-700 px-4 py-3 mt-4">
               {error}
             </div>
           )}
 
           {(!email || emailError) && (
-            <div className="bg-slate-100 p-4 rounded text-center text-slate-600">
+            <div className="bg-zinc-100 border border-zinc-300 p-4 text-center text-zinc-600">
               Enter a valid email to continue
             </div>
           )}
